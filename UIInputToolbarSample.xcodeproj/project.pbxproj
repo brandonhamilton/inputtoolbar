@@ -1,0 +1,339 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CA3A7B9213708CDE00CF5E6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA3A7B9113708CDE00CF5E6B /* UIKit.framework */; };
+		CA3A7B9413708CDE00CF5E6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA3A7B9313708CDE00CF5E6B /* Foundation.framework */; };
+		CA3A7B9613708CDE00CF5E6B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA3A7B9513708CDE00CF5E6B /* CoreGraphics.framework */; };
+		CA3A7B9C13708CDE00CF5E6B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA3A7B9A13708CDE00CF5E6B /* InfoPlist.strings */; };
+		CA3A7B9F13708CDE00CF5E6B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3A7B9E13708CDE00CF5E6B /* main.m */; };
+		CA3A7BA513708CDF00CF5E6B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA3A7BA313708CDF00CF5E6B /* MainWindow.xib */; };
+		CAB6463213758821007B4CF0 /* UIExpandingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB6462913758821007B4CF0 /* UIExpandingTextView.m */; };
+		CAB6463313758821007B4CF0 /* UIExpandingTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB6462B13758821007B4CF0 /* UIExpandingTextViewInternal.m */; };
+		CAB6463413758821007B4CF0 /* UIInputToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB6462D13758821007B4CF0 /* UIInputToolbar.m */; };
+		CAB6463513758821007B4CF0 /* UIInputToolbarSampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB6462F13758821007B4CF0 /* UIInputToolbarSampleAppDelegate.m */; };
+		CAB6463613758821007B4CF0 /* UIInputToolbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB6463113758821007B4CF0 /* UIInputToolbarViewController.m */; };
+		CAB6463D13758836007B4CF0 /* buttonbg@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CAB6463713758836007B4CF0 /* buttonbg@2x~iphone.png */; };
+		CAB6463E13758836007B4CF0 /* buttonbg~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CAB6463813758836007B4CF0 /* buttonbg~iphone.png */; };
+		CAB6463F13758836007B4CF0 /* textbg@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CAB6463913758836007B4CF0 /* textbg@2x~iphone.png */; };
+		CAB6464013758836007B4CF0 /* textbg~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CAB6463A13758836007B4CF0 /* textbg~iphone.png */; };
+		CAB6464113758836007B4CF0 /* toolbarbg@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CAB6463B13758836007B4CF0 /* toolbarbg@2x~iphone.png */; };
+		CAB6464213758836007B4CF0 /* toolbarbg~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CAB6463C13758836007B4CF0 /* toolbarbg~iphone.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CA3A7B8D13708CDE00CF5E6B /* UIInputToolbarSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIInputToolbarSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA3A7B9113708CDE00CF5E6B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CA3A7B9313708CDE00CF5E6B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CA3A7B9513708CDE00CF5E6B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CA3A7B9913708CDE00CF5E6B /* UIInputToolbarSample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UIInputToolbarSample-Info.plist"; sourceTree = "<group>"; };
+		CA3A7B9B13708CDE00CF5E6B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CA3A7B9D13708CDE00CF5E6B /* UIInputToolbarSample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIInputToolbarSample-Prefix.pch"; sourceTree = "<group>"; };
+		CA3A7B9E13708CDE00CF5E6B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CA3A7BA413708CDF00CF5E6B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		CAB6462813758821007B4CF0 /* UIExpandingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIExpandingTextView.h; sourceTree = "<group>"; };
+		CAB6462913758821007B4CF0 /* UIExpandingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIExpandingTextView.m; sourceTree = "<group>"; };
+		CAB6462A13758821007B4CF0 /* UIExpandingTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIExpandingTextViewInternal.h; sourceTree = "<group>"; };
+		CAB6462B13758821007B4CF0 /* UIExpandingTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIExpandingTextViewInternal.m; sourceTree = "<group>"; };
+		CAB6462C13758821007B4CF0 /* UIInputToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIInputToolbar.h; sourceTree = "<group>"; };
+		CAB6462D13758821007B4CF0 /* UIInputToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIInputToolbar.m; sourceTree = "<group>"; };
+		CAB6462E13758821007B4CF0 /* UIInputToolbarSampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIInputToolbarSampleAppDelegate.h; sourceTree = "<group>"; };
+		CAB6462F13758821007B4CF0 /* UIInputToolbarSampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIInputToolbarSampleAppDelegate.m; sourceTree = "<group>"; };
+		CAB6463013758821007B4CF0 /* UIInputToolbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIInputToolbarViewController.h; sourceTree = "<group>"; };
+		CAB6463113758821007B4CF0 /* UIInputToolbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIInputToolbarViewController.m; sourceTree = "<group>"; };
+		CAB6463713758836007B4CF0 /* buttonbg@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "buttonbg@2x~iphone.png"; path = "../../../iOS/UIInputToolbarSample/UIInputToolbarSample/Resources/buttonbg@2x~iphone.png"; sourceTree = "<group>"; };
+		CAB6463813758836007B4CF0 /* buttonbg~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "buttonbg~iphone.png"; path = "../../../iOS/UIInputToolbarSample/UIInputToolbarSample/Resources/buttonbg~iphone.png"; sourceTree = "<group>"; };
+		CAB6463913758836007B4CF0 /* textbg@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "textbg@2x~iphone.png"; path = "../../../iOS/UIInputToolbarSample/UIInputToolbarSample/Resources/textbg@2x~iphone.png"; sourceTree = "<group>"; };
+		CAB6463A13758836007B4CF0 /* textbg~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "textbg~iphone.png"; path = "../../../iOS/UIInputToolbarSample/UIInputToolbarSample/Resources/textbg~iphone.png"; sourceTree = "<group>"; };
+		CAB6463B13758836007B4CF0 /* toolbarbg@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbarbg@2x~iphone.png"; path = "../../../iOS/UIInputToolbarSample/UIInputToolbarSample/Resources/toolbarbg@2x~iphone.png"; sourceTree = "<group>"; };
+		CAB6463C13758836007B4CF0 /* toolbarbg~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbarbg~iphone.png"; path = "../../../iOS/UIInputToolbarSample/UIInputToolbarSample/Resources/toolbarbg~iphone.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CA3A7B8A13708CDE00CF5E6B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA3A7B9213708CDE00CF5E6B /* UIKit.framework in Frameworks */,
+				CA3A7B9413708CDE00CF5E6B /* Foundation.framework in Frameworks */,
+				CA3A7B9613708CDE00CF5E6B /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CA3A7B8213708CDE00CF5E6B = {
+			isa = PBXGroup;
+			children = (
+				CA3A7B9713708CDE00CF5E6B /* UIInputToolbarSample */,
+				CA3A7B9013708CDE00CF5E6B /* Frameworks */,
+				CA3A7B8E13708CDE00CF5E6B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CA3A7B8E13708CDE00CF5E6B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CA3A7B8D13708CDE00CF5E6B /* UIInputToolbarSample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CA3A7B9013708CDE00CF5E6B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA3A7B9113708CDE00CF5E6B /* UIKit.framework */,
+				CA3A7B9313708CDE00CF5E6B /* Foundation.framework */,
+				CA3A7B9513708CDE00CF5E6B /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CA3A7B9713708CDE00CF5E6B /* UIInputToolbarSample */ = {
+			isa = PBXGroup;
+			children = (
+				CAB6462613758821007B4CF0 /* Classes */,
+				CA3A7BAC13708CF700CF5E6B /* Resources */,
+				CA3A7B9813708CDE00CF5E6B /* Supporting Files */,
+			);
+			path = UIInputToolbarSample;
+			sourceTree = "<group>";
+		};
+		CA3A7B9813708CDE00CF5E6B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CA3A7B9913708CDE00CF5E6B /* UIInputToolbarSample-Info.plist */,
+				CA3A7B9A13708CDE00CF5E6B /* InfoPlist.strings */,
+				CA3A7B9D13708CDE00CF5E6B /* UIInputToolbarSample-Prefix.pch */,
+				CA3A7B9E13708CDE00CF5E6B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CA3A7BAC13708CF700CF5E6B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CAB6463713758836007B4CF0 /* buttonbg@2x~iphone.png */,
+				CAB6463813758836007B4CF0 /* buttonbg~iphone.png */,
+				CAB6463913758836007B4CF0 /* textbg@2x~iphone.png */,
+				CAB6463A13758836007B4CF0 /* textbg~iphone.png */,
+				CAB6463B13758836007B4CF0 /* toolbarbg@2x~iphone.png */,
+				CAB6463C13758836007B4CF0 /* toolbarbg~iphone.png */,
+				CA3A7BA313708CDF00CF5E6B /* MainWindow.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		CAB6462613758821007B4CF0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CAB6462713758821007B4CF0 /* UIInputToolbar */,
+				CAB6462E13758821007B4CF0 /* UIInputToolbarSampleAppDelegate.h */,
+				CAB6462F13758821007B4CF0 /* UIInputToolbarSampleAppDelegate.m */,
+				CAB6463013758821007B4CF0 /* UIInputToolbarViewController.h */,
+				CAB6463113758821007B4CF0 /* UIInputToolbarViewController.m */,
+			);
+			name = Classes;
+			path = ../../../iOS/UIInputToolbarSample/UIInputToolbarSample/Classes;
+			sourceTree = "<group>";
+		};
+		CAB6462713758821007B4CF0 /* UIInputToolbar */ = {
+			isa = PBXGroup;
+			children = (
+				CAB6462813758821007B4CF0 /* UIExpandingTextView.h */,
+				CAB6462913758821007B4CF0 /* UIExpandingTextView.m */,
+				CAB6462A13758821007B4CF0 /* UIExpandingTextViewInternal.h */,
+				CAB6462B13758821007B4CF0 /* UIExpandingTextViewInternal.m */,
+				CAB6462C13758821007B4CF0 /* UIInputToolbar.h */,
+				CAB6462D13758821007B4CF0 /* UIInputToolbar.m */,
+			);
+			path = UIInputToolbar;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CA3A7B8C13708CDE00CF5E6B /* UIInputToolbarSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA3A7BA813708CDF00CF5E6B /* Build configuration list for PBXNativeTarget "UIInputToolbarSample" */;
+			buildPhases = (
+				CA3A7B8913708CDE00CF5E6B /* Sources */,
+				CA3A7B8A13708CDE00CF5E6B /* Frameworks */,
+				CA3A7B8B13708CDE00CF5E6B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UIInputToolbarSample;
+			productName = UIInputToolbarSample;
+			productReference = CA3A7B8D13708CDE00CF5E6B /* UIInputToolbarSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CA3A7B8413708CDE00CF5E6B /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = CA3A7B8713708CDE00CF5E6B /* Build configuration list for PBXProject "UIInputToolbarSample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CA3A7B8213708CDE00CF5E6B;
+			productRefGroup = CA3A7B8E13708CDE00CF5E6B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CA3A7B8C13708CDE00CF5E6B /* UIInputToolbarSample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CA3A7B8B13708CDE00CF5E6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA3A7B9C13708CDE00CF5E6B /* InfoPlist.strings in Resources */,
+				CA3A7BA513708CDF00CF5E6B /* MainWindow.xib in Resources */,
+				CAB6463D13758836007B4CF0 /* buttonbg@2x~iphone.png in Resources */,
+				CAB6463E13758836007B4CF0 /* buttonbg~iphone.png in Resources */,
+				CAB6463F13758836007B4CF0 /* textbg@2x~iphone.png in Resources */,
+				CAB6464013758836007B4CF0 /* textbg~iphone.png in Resources */,
+				CAB6464113758836007B4CF0 /* toolbarbg@2x~iphone.png in Resources */,
+				CAB6464213758836007B4CF0 /* toolbarbg~iphone.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CA3A7B8913708CDE00CF5E6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA3A7B9F13708CDE00CF5E6B /* main.m in Sources */,
+				CAB6463213758821007B4CF0 /* UIExpandingTextView.m in Sources */,
+				CAB6463313758821007B4CF0 /* UIExpandingTextViewInternal.m in Sources */,
+				CAB6463413758821007B4CF0 /* UIInputToolbar.m in Sources */,
+				CAB6463513758821007B4CF0 /* UIInputToolbarSampleAppDelegate.m in Sources */,
+				CAB6463613758821007B4CF0 /* UIInputToolbarViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CA3A7B9A13708CDE00CF5E6B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CA3A7B9B13708CDE00CF5E6B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CA3A7BA313708CDF00CF5E6B /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CA3A7BA413708CDF00CF5E6B /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CA3A7BA613708CDF00CF5E6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CA3A7BA713708CDF00CF5E6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		CA3A7BA913708CDF00CF5E6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UIInputToolbarSample/UIInputToolbarSample-Prefix.pch";
+				INFOPLIST_FILE = "UIInputToolbarSample/UIInputToolbarSample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CA3A7BAA13708CDF00CF5E6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UIInputToolbarSample/UIInputToolbarSample-Prefix.pch";
+				INFOPLIST_FILE = "UIInputToolbarSample/UIInputToolbarSample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CA3A7B8713708CDE00CF5E6B /* Build configuration list for PBXProject "UIInputToolbarSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA3A7BA613708CDF00CF5E6B /* Debug */,
+				CA3A7BA713708CDF00CF5E6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA3A7BA813708CDF00CF5E6B /* Build configuration list for PBXNativeTarget "UIInputToolbarSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA3A7BA913708CDF00CF5E6B /* Debug */,
+				CA3A7BAA13708CDF00CF5E6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CA3A7B8413708CDE00CF5E6B /* Project object */;
+}
