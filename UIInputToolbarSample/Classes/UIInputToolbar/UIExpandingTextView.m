@@ -96,7 +96,8 @@
 		[self setMinimumNumberOfLines:1];
 		animateHeightChange = YES;
 		internalTextView.text = @"";
-		[self setMaximumNumberOfLines:4];
+		[self setMaximumNumberOfLines:13];
+        
         [self sizeToFit];
     }
     return self;
