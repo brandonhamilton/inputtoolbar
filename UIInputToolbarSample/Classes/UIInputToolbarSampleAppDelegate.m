@@ -33,8 +33,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.viewController = [UIInputToolbarViewController alloc];
-    [self.window addSubview:self.viewController.view];
+    self.viewController = [[UIInputToolbarViewController alloc] init];
+    [self.window setRootViewController:self.viewController];
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -45,6 +45,7 @@
 
 -(void)setupToolbar:(NSString *)buttonLabel
 {
+    self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     self.tintColor = [UIColor lightGrayColor];
     
     /* Create custom send button*/
@@ -81,15 +82,17 @@
 
 -(id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
-    [self setupToolbar:@"Send"];
+    if ((self = [super initWithFrame:frame])) {
+        [self setupToolbar:@"Send"];
+    }
     return self;
 }
 
 -(id)init
 {
-    self = [super init];
-    [self setupToolbar:@"Send"];
+    if ((self = [super init])) {
+        [self setupToolbar:@"Send"];
+    }
     return self;
 }
 

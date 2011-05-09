@@ -28,6 +28,9 @@
 
 @interface UIInputToolbarViewController : UIViewController <UIInputToolbarDelegate> {
     UIInputToolbar *inputToolbar;
+    
+    @private
+    BOOL keyboardIsVisible;
 }
 
 @property (nonatomic, retain) UIInputToolbar *inputToolbar;

@@ -65,6 +65,7 @@
 	BOOL editable;
 	UIDataDetectorTypes dataDetectorTypes;
 	UIReturnKeyType returnKeyType;
+    BOOL forceSizeUpdate;
 }
 
 @property (nonatomic, retain) UITextView *internalTextView;

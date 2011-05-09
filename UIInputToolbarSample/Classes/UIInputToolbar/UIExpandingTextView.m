@@ -63,6 +63,8 @@
 {
     if ((self = [super initWithFrame:frame])) 
     {
+        forceSizeUpdate = NO;
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		CGRect backgroundFrame = frame;
         backgroundFrame.origin.y = 0;
 		backgroundFrame.origin.x = 0;
@@ -80,6 +82,7 @@
         internalTextView.backgroundColor = [UIColor clearColor];
         internalTextView.showsHorizontalScrollIndicator = NO;
         [internalTextView sizeToFit];
+        internalTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         
         /* Custom Background image */
         textViewBackgroundImage = [[UIImageView alloc] initWithFrame:backgroundFrame];
@@ -124,6 +127,7 @@
 	internalTextView.frame   = textViewFrame;
     backgroundFrame.size.height  -= 8;
     textViewBackgroundImage.frame = backgroundFrame;
+    forceSizeUpdate = YES;
 	[super setFrame:aframe];
 }
 
@@ -135,6 +139,7 @@
      
 -(void)setMaximumNumberOfLines:(int)n
 {
+    BOOL didChange            = NO;
     NSString *saveText        = internalTextView.text;
     NSString *newText         = @"-";
     internalTextView.hidden   = YES;
@@ -144,11 +149,16 @@
         newText = [newText stringByAppendingString:@"\n|W|"];
     }
     internalTextView.text     = newText;
+    didChange = (maximumHeight != internalTextView.contentSize.height);
     maximumHeight             = internalTextView.contentSize.height;
     maximumNumberOfLines      = n;
     internalTextView.text     = saveText;
     internalTextView.hidden   = NO;
     internalTextView.delegate = self;
+    if (didChange) {
+        forceSizeUpdate = YES;
+        [self textViewDidChange:self.internalTextView];
+    }
 }
 
 -(void)setMinimumNumberOfLines:(int)m
@@ -180,13 +190,13 @@
         newHeight = minimumHeight;
     }
     
-	if (internalTextView.frame.size.height != newHeight)
+	if (internalTextView.frame.size.height != newHeight || forceSizeUpdate)
 	{
+        forceSizeUpdate = NO;
         if (newHeight > maximumHeight && internalTextView.frame.size.height <= maximumHeight)
         {
             newHeight = maximumHeight;
         }
-        
 		if (newHeight <= maximumHeight)
 		{
 			if(animateHeightChange)
