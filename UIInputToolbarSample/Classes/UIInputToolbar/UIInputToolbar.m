@@ -65,17 +65,18 @@
     [button sizeToFit];
     
     self.inputButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.inputButton.customView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     /* Disable button initially */
     self.inputButton.enabled = NO;
 
     /* Create UIExpandingTextView input */
     self.textView = [[UIExpandingTextView alloc] initWithFrame:CGRectMake(7, 7, 236, 26)];
     self.textView.delegate = self;
- 
     [self addSubview:self.textView];
     
     /* Right align the toolbar button */
     UIBarButtonItem *flexItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
+    
     NSArray *items = [NSArray arrayWithObjects: flexItem, self.inputButton, nil];
     [self setItems:items animated:NO];
 }
@@ -102,6 +103,10 @@
     UIImage *backgroundImage = [UIImage imageNamed:@"toolbarbg.png"];
     backgroundImage = [backgroundImage stretchableImageWithLeftCapWidth:floorf(backgroundImage.size.width/2) topCapHeight:floorf(backgroundImage.size.height/2)];
     [backgroundImage drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    
+    CGRect i = self.inputButton.customView.frame;
+    i.origin.y = self.frame.size.height - i.size.height - 7;
+    self.inputButton.customView.frame = i;
 }
 
 - (void)dealloc
@@ -110,6 +115,7 @@
     [inputButton release];
     [super dealloc];
 }
+
 
 #pragma mark -
 #pragma mark UIExpandingTextView delegate
@@ -131,13 +137,6 @@
         self.inputButton.enabled = YES;
     else
         self.inputButton.enabled = NO;
-    
-    /* Vertically align the button to the bottom of the toolbar */
-    CGRect i = self.inputButton.customView.frame;
-    i.origin.y = self.frame.size.height - i.size.height - 7;
-    self.inputButton.customView.frame = i;
-    [self.inputButton.customView setNeedsDisplay];
-    [self setNeedsDisplay];
 }
 
 @end
