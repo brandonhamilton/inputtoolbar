@@ -48,6 +48,13 @@
 @synthesize animateHeightChange;
 @synthesize returnKeyType;
 @synthesize textViewBackgroundImage;
+@synthesize placeholder;
+
+- (void)setPlaceholder:(NSString *)placeholders
+{
+    placeholder = placeholders;
+    placeholderLabel.text = placeholders;
+}
 
 - (int)minimumNumberOfLines
 {
@@ -84,6 +91,14 @@
         [internalTextView sizeToFit];
         internalTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         
+        /* set placeholder */
+        placeholderLabel = [[UILabel alloc]initWithFrame:CGRectMake(8,3,self.bounds.size.width - 16,self.bounds.size.height)];
+        placeholderLabel.text = placeholder;
+        placeholderLabel.font = internalTextView.font;
+        placeholderLabel.backgroundColor = [UIColor clearColor];
+        placeholderLabel.textColor = [UIColor grayColor];
+        [internalTextView addSubview:placeholderLabel];
+        
         /* Custom Background image */
         textViewBackgroundImage = [[UIImageView alloc] initWithFrame:backgroundFrame];
         textViewBackgroundImage.image          = [UIImage imageNamed:@"textbg"];
@@ -99,7 +114,7 @@
 		[self setMinimumNumberOfLines:1];
 		animateHeightChange = YES;
 		internalTextView.text = @"";
-		[self setMaximumNumberOfLines:13];
+		[self setMaximumNumberOfLines:3];
         
         [self sizeToFit];
     }
@@ -144,7 +159,7 @@
     NSString *newText         = @"-";
     internalTextView.hidden   = YES;
     internalTextView.delegate = nil;
-    for (int i = 2; i < n; ++i)
+    for (int i = 1; i < n; ++i)
     {
         newText = [newText stringByAppendingString:@"\n|W|"];
     }
@@ -167,7 +182,7 @@
     NSString *newText         = @"-";
     internalTextView.hidden   = YES;
     internalTextView.delegate = nil;
-    for (int i = 2; i < m; ++i)
+    for (int i = 1; i < m; ++i)
     {
         newText = [newText stringByAppendingString:@"\n|W|"];
     }
@@ -183,6 +198,11 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
+    if(textView.text.length == 0)
+        placeholderLabel.alpha = 1;
+    else
+        placeholderLabel.alpha = 0;
+    
 	NSInteger newHeight = internalTextView.contentSize.height;
     
 	if(newHeight < minimumHeight || !internalTextView.hasText)
@@ -221,7 +241,7 @@
             internalTextView.frame = CGRectInset(r, kTextInsetX, 0);
             r.size.height -= 8;
             textViewBackgroundImage.frame = r;
-
+            
 			if(animateHeightChange)
             {
 				[UIView commitAnimations];
@@ -252,6 +272,7 @@
     {
 		[delegate expandingTextViewDidChange:self];
 	}
+
 	
 }
 

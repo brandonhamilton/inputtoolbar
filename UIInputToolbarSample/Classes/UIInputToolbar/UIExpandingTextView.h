@@ -66,6 +66,8 @@
 	UIDataDetectorTypes dataDetectorTypes;
 	UIReturnKeyType returnKeyType;
     BOOL forceSizeUpdate;
+    NSString *placeholder;
+    UILabel *placeholderLabel;
 }
 
 @property (nonatomic, retain) UITextView *internalTextView;
@@ -84,7 +86,7 @@
 @property (nonatomic) UIDataDetectorTypes dataDetectorTypes __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_3_0);
 @property (nonatomic) UIReturnKeyType returnKeyType;
 @property (nonatomic, retain) UIImageView *textViewBackgroundImage;
-
+@property (nonatomic,copy) NSString *placeholder;
 - (BOOL)hasText;
 - (void)scrollRangeToVisible:(NSRange)range;
 - (void)clearText;
