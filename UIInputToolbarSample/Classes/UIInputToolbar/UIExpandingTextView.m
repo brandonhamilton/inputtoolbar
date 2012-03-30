@@ -294,6 +294,7 @@
 {
 	[internalTextView release];
     [textViewBackgroundImage release];
+    [placeholderLabel release];
     [super dealloc];
 }
 
