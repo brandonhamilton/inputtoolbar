@@ -114,7 +114,7 @@
 		[self setMinimumNumberOfLines:1];
 		animateHeightChange = YES;
 		internalTextView.text = @"";
-		[self setMaximumNumberOfLines:13];
+		[self setMaximumNumberOfLines:3];
         
         [self sizeToFit];
     }
@@ -159,7 +159,7 @@
     NSString *newText         = @"-";
     internalTextView.hidden   = YES;
     internalTextView.delegate = nil;
-    for (int i = 2; i < n; ++i)
+    for (int i = 1; i < n; ++i)
     {
         newText = [newText stringByAppendingString:@"\n|W|"];
     }
@@ -182,7 +182,7 @@
     NSString *newText         = @"-";
     internalTextView.hidden   = YES;
     internalTextView.delegate = nil;
-    for (int i = 2; i < m; ++i)
+    for (int i = 1; i < m; ++i)
     {
         newText = [newText stringByAppendingString:@"\n|W|"];
     }
