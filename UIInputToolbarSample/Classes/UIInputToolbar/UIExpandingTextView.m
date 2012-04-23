@@ -82,13 +82,16 @@
         internalTextView.backgroundColor = [UIColor clearColor];
         internalTextView.showsHorizontalScrollIndicator = NO;
         [internalTextView sizeToFit];
-        internalTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        internalTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+        backgroundFrame.size.height -= 8;
         
         /* Custom Background image */
         textViewBackgroundImage = [[UIImageView alloc] initWithFrame:backgroundFrame];
         textViewBackgroundImage.image          = [UIImage imageNamed:@"textbg"];
         textViewBackgroundImage.contentMode    = UIViewContentModeScaleToFill;
         textViewBackgroundImage.contentStretch = CGRectMake(0.5, 0.5, 0, 0);
+        textViewBackgroundImage.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         [self addSubview:textViewBackgroundImage];
         [self addSubview:internalTextView];
@@ -118,19 +121,6 @@
     self.frame = r;
 }
 
--(void)setFrame:(CGRect)aframe
-{
-    CGRect backgroundFrame   = aframe;
-    backgroundFrame.origin.y = 0;
-    backgroundFrame.origin.x = 0;
-    CGRect textViewFrame = CGRectInset(backgroundFrame, kTextInsetX, 0);
-	internalTextView.frame   = textViewFrame;
-    backgroundFrame.size.height  -= 8;
-    textViewBackgroundImage.frame = backgroundFrame;
-    forceSizeUpdate = YES;
-	[super setFrame:aframe];
-}
-
 -(void)clearText
 {
     self.text = @"";
@@ -144,7 +134,7 @@
     NSString *newText         = @"-";
     internalTextView.hidden   = YES;
     internalTextView.delegate = nil;
-    for (int i = 2; i < n; ++i)
+    for (int i = 0; i < n-1; ++i)
     {
         newText = [newText stringByAppendingString:@"\n|W|"];
     }
@@ -167,7 +157,7 @@
     NSString *newText         = @"-";
     internalTextView.hidden   = YES;
     internalTextView.delegate = nil;
-    for (int i = 2; i < m; ++i)
+    for (int i = 0; i < m-1; ++i)
     {
         newText = [newText stringByAppendingString:@"\n|W|"];
     }
@@ -185,74 +175,78 @@
 {
 	NSInteger newHeight = internalTextView.contentSize.height;
     
-	if(newHeight < minimumHeight || !internalTextView.hasText)
+    if(newHeight < minimumHeight || !internalTextView.hasText)
     {
         newHeight = minimumHeight;
     }
     
-	if (internalTextView.frame.size.height != newHeight || forceSizeUpdate)
-	{
+    if (newHeight > maximumHeight && internalTextView.frame.size.height <= maximumHeight)
+    {
+        newHeight = maximumHeight;
+    }
+          
+    if (internalTextView.frame.size.height != newHeight || forceSizeUpdate)
+    {
         forceSizeUpdate = NO;
-        if (newHeight > maximumHeight && internalTextView.frame.size.height <= maximumHeight)
-        {
-            newHeight = maximumHeight;
-        }
-		if (newHeight <= maximumHeight)
-		{
-			if(animateHeightChange)
-            {
-				[UIView beginAnimations:@"" context:nil];
-				[UIView setAnimationDelegate:self];
-				[UIView setAnimationDidStopSelector:@selector(growDidStop)];
-				[UIView setAnimationBeginsFromCurrentState:YES];
-			}
-			
-			if ([delegate respondsToSelector:@selector(expandingTextView:willChangeHeight:)]) 
-            {
-				[delegate expandingTextView:self willChangeHeight:(newHeight+ kTextInsetBottom)];
-			}
-			
-			/* Resize the frame */
-			CGRect r = self.frame;
-			r.size.height = newHeight + kTextInsetBottom;
-			self.frame = r;
-			r.origin.y = 0;
-			r.origin.x = 0;
-            internalTextView.frame = CGRectInset(r, kTextInsetX, 0);
-            r.size.height -= 8;
-            textViewBackgroundImage.frame = r;
 
-			if(animateHeightChange)
-            {
-				[UIView commitAnimations];
-			}
-            else if ([delegate respondsToSelector:@selector(expandingTextView:didChangeHeight:)]) 
-            {
-                [delegate expandingTextView:self didChangeHeight:(newHeight+ kTextInsetBottom)];
+        if (newHeight <= maximumHeight)
+        {
+            newHeight += kTextInsetBottom;
+            
+            void (^heightChangeBlock)(void) = ^(void) {
+                if ([delegate respondsToSelector:@selector(expandingTextView:willChangeHeight:)]) 
+                {
+                    [delegate expandingTextView:self willChangeHeight:newHeight];
+                }
+                
+                /* Resize the frame */
+                CGRect r = self.frame;
+                r.size.height = newHeight;
+                self.frame = r;
+            };
+                        
+            void (^completionBlock)(BOOL finished) = ^(BOOL finished) {
+                if ([delegate respondsToSelector:@selector(expandingTextView:didChangeHeight:)]) {
+                    [delegate expandingTextView:self didChangeHeight:newHeight];
+                }
+            };
+
+            if(animateHeightChange) {
+                [UIView animateWithDuration:0.2f
+                                      delay:0.0f 
+                                    options:UIViewAnimationOptionBeginFromCurrentState 
+                                 animations:heightChangeBlock 
+                                 completion:completionBlock];
+            } else {
+                heightChangeBlock();
+                completionBlock(YES);
             }
-		}
-		
-		if (newHeight >= maximumHeight)
-		{
-            /* Enable vertical scrolling */
-			if(!internalTextView.scrollEnabled)
-            {
-				internalTextView.scrollEnabled = YES;
-				[internalTextView flashScrollIndicators];
-			}
-		} 
-        else 
+        }
+        
+        if(newHeight < maximumHeight)
         {
             /* Disable vertical scrolling */
-			internalTextView.scrollEnabled = NO;
-		}
-	}
-	
-	if ([delegate respondsToSelector:@selector(expandingTextViewDidChange:)]) 
+            if(internalTextView.scrollEnabled)
+            {
+                internalTextView.scrollEnabled = NO;
+            }
+        }
+        
+        if (newHeight >= maximumHeight)
+        {
+            /* Enable vertical scrolling */
+            if(!internalTextView.scrollEnabled)
+            {
+                internalTextView.scrollEnabled = YES;
+                [internalTextView flashScrollIndicators];
+            }
+        }
+    }
+    
+    if ([delegate respondsToSelector:@selector(expandingTextViewDidChange:)]) 
     {
-		[delegate expandingTextViewDidChange:self];
-	}
-	
+        [delegate expandingTextViewDidChange:self];
+    }
 }
 
 -(void)growDidStop
@@ -267,6 +261,11 @@
 {
 	[super resignFirstResponder];
 	return [internalTextView resignFirstResponder];
+}
+
+-(BOOL)isFirstResponder
+{
+	return [internalTextView isFirstResponder];
 }
 
 - (void)dealloc 
