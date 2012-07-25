@@ -129,6 +129,9 @@
     r.origin.y += diff;
     r.size.height -= diff;
     self.frame = r;
+	
+	NSDictionary *aUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:height],DR_TEXTVIEW_HEIGHT_KEY, nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:DRExpandingTextViewWillChangeHeightNotification object:nil userInfo:(NSDictionary *)aUserInfo];
 }
 
 -(void)expandingTextViewDidChange:(UIExpandingTextView *)expandingTextView

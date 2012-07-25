@@ -26,6 +26,12 @@
 #import <UIKit/UIKit.h>
 #import "UIExpandingTextView.h"
 
+#define	DR_TEXTVIEW_HEIGHT_KEY @"height"
+
+NSString * const DRExpandingTextViewWillChangeHeightNotification = @"DRExpandingTextViewWillChangeHeight";
+
+
+
 @protocol UIInputToolbarDelegate <NSObject>
 @optional
 -(void)inputButtonPressed:(NSString *)inputText;
