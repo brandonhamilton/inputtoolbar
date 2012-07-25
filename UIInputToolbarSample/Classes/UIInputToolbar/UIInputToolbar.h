@@ -28,8 +28,7 @@
 
 #define	DR_TEXTVIEW_HEIGHT_KEY @"height"
 
-NSString * const DRExpandingTextViewWillChangeHeightNotification = @"DRExpandingTextViewWillChangeHeight";
-
+extern NSString * const DRExpandingTextViewWillChangeHeightNotification;
 
 
 @protocol UIInputToolbarDelegate <NSObject>

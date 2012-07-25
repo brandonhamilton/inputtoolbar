@@ -25,6 +25,9 @@
 
 #import "UIInputToolbar.h"
 
+NSString * const DRExpandingTextViewWillChangeHeightNotification = @"DRExpandingTextViewWillChangeHeight";
+
+
 @implementation UIInputToolbar
 
 @synthesize textView;
