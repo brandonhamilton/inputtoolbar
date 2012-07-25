@@ -29,6 +29,7 @@
 
 @synthesize textView;
 @synthesize inputButton;
+@synthesize inputButtonShouldDisableForNoText;
 @synthesize delegate;
 
 -(void)inputButtonPressed
@@ -68,7 +69,8 @@
     self.inputButton.customView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     /* Disable button initially */
     self.inputButton.enabled = NO;
-
+    self.inputButtonShouldDisableForNoText = YES;
+    
     /* Create UIExpandingTextView input */
     self.textView = [[UIExpandingTextView alloc] initWithFrame:CGRectMake(7, 7, 236, 26)];
     self.textView.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(4.0f, 0.0f, 10.0f, 0.0f);

@@ -48,6 +48,7 @@ NSString * const DRExpandingTextViewWillChangeHeightNotification = @"DRExpanding
 
 @property (nonatomic, retain) UIExpandingTextView *textView;
 @property (nonatomic, retain) UIBarButtonItem *inputButton;
+@property (nonatomic) BOOL inputButtonShouldDisableForNoText;
 @property (assign) NSObject<UIInputToolbarDelegate> *delegate;
 
 @end
