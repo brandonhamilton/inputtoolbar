@@ -25,10 +25,15 @@
 
 #import "UIInputToolbar.h"
 
+NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpandingTextViewWillChangeHeight";
+
+
 @implementation UIInputToolbar
 
 @synthesize textView;
+@synthesize characterLimit;
 @synthesize inputButton;
+@synthesize inputButtonShouldDisableForNoText;
 @synthesize delegate;
 
 -(void)inputButtonPressed
@@ -68,7 +73,8 @@
     self.inputButton.customView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     /* Disable button initially */
     self.inputButton.enabled = NO;
-
+    self.inputButtonShouldDisableForNoText = YES;
+    
     /* Create UIExpandingTextView input */
     self.textView = [[UIExpandingTextView alloc] initWithFrame:CGRectMake(7, 7, 236, 26)];
     self.textView.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(4.0f, 0.0f, 10.0f, 0.0f);
@@ -77,6 +83,17 @@
     
     /* Right align the toolbar button */
     UIBarButtonItem *flexItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
+    
+    /* Add the character count label */
+    characterCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(253, -5, 50, 40)];
+    characterCountLabel.textAlignment = UITextAlignmentCenter;
+    characterCountLabel.font = [UIFont boldSystemFontOfSize:12];
+    characterCountLabel.textColor = [UIColor darkGrayColor];
+    characterCountLabel.shadowColor = [UIColor whiteColor];
+    characterCountLabel.shadowOffset = CGSizeMake(0, 1);
+    characterCountLabel.backgroundColor = [UIColor clearColor];
+    
+    [self addSubview:characterCountLabel];
     
     NSArray *items = [NSArray arrayWithObjects: flexItem, self.inputButton, nil];
     [self setItems:items animated:NO];
@@ -129,15 +146,40 @@
     r.origin.y += diff;
     r.size.height -= diff;
     self.frame = r;
+	
+	NSDictionary *aUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:height],CH_TEXTVIEW_HEIGHT_KEY, nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:CHExpandingTextViewWillChangeHeightNotification object:nil userInfo:(NSDictionary *)aUserInfo];
 }
 
 -(void)expandingTextViewDidChange:(UIExpandingTextView *)expandingTextView
 {
     /* Enable/Disable the button */
-    if ([expandingTextView.text length] > 0)
-        self.inputButton.enabled = YES;
-    else
-        self.inputButton.enabled = NO;
+    if (self.inputButtonShouldDisableForNoText) {
+        if ([expandingTextView.text length] > 0) {
+            self.inputButton.enabled = YES;
+        } else {
+            self.inputButton.enabled = NO;
+        }
+    }
+    
+    /* Show/Hide the character count and update its text */
+    if (characterLimit > 0) {
+        if (self.frame.size.height > 40) {
+            characterCountLabel.hidden = NO;
+        } else {
+            characterCountLabel.hidden = YES;
+        }
+        
+        characterCountLabel.text = [NSString stringWithFormat:@"%i/%i",expandingTextView.text.length,characterLimit];
+        
+        if (expandingTextView.text.length > characterLimit) {
+            characterCountLabel.textColor = [UIColor redColor];
+            inputButton.enabled = NO;
+        } else if (expandingTextView.text.length > 0) {
+            characterCountLabel.textColor = [UIColor darkGrayColor];
+            inputButton.enabled = YES;
+        }
+    }
 }
 
 @end

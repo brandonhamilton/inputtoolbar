@@ -26,6 +26,11 @@
 #import <UIKit/UIKit.h>
 #import "UIExpandingTextView.h"
 
+#define	CH_TEXTVIEW_HEIGHT_KEY @"height"
+
+extern NSString * const CHExpandingTextViewWillChangeHeightNotification;
+
+
 @protocol UIInputToolbarDelegate <NSObject>
 @optional
 -(void)inputButtonPressed:(NSString *)inputText;
@@ -35,13 +40,16 @@
 {
     UIExpandingTextView *textView;
     UIBarButtonItem *inputButton;
+    UILabel *characterCountLabel;
     NSObject <UIInputToolbarDelegate> *delegate;
 }
 
 - (void)drawRect:(CGRect)rect;
 
 @property (nonatomic, retain) UIExpandingTextView *textView;
+@property (nonatomic) NSInteger characterLimit;
 @property (nonatomic, retain) UIBarButtonItem *inputButton;
+@property (nonatomic) BOOL inputButtonShouldDisableForNoText;
 @property (assign) NSObject<UIInputToolbarDelegate> *delegate;
 
 @end
