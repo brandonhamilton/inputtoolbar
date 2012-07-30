@@ -27,6 +27,12 @@
 
 NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpandingTextViewWillChangeHeight";
 
+@interface UIInputToolbar ()
+
+@property (nonatomic, retain) UIButton *innerBarButton;
+
+@end
+
 
 @implementation UIInputToolbar
 
@@ -35,6 +41,9 @@ NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpanding
 @synthesize inputButton;
 @synthesize inputButtonShouldDisableForNoText;
 @synthesize delegate;
+@synthesize backgroundImage;
+@synthesize inputButtonImage=_inputButtonImage;
+@synthesize innerBarButton;
 
 -(void)inputButtonPressed
 {
@@ -54,8 +63,7 @@ NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpanding
     self.tintColor = [UIColor lightGrayColor];
     
     /* Create custom send button*/
-    UIImage *buttonImage = [UIImage imageNamed:@"buttonbg.png"];
-    buttonImage          = [buttonImage stretchableImageWithLeftCapWidth:floorf(buttonImage.size.width/2) topCapHeight:floorf(buttonImage.size.height/2)];
+    UIImage *stretchableButtonImage = [self.inputButtonImage stretchableImageWithLeftCapWidth:floorf(self.inputButtonImage.size.width/2) topCapHeight:floorf(self.inputButtonImage.size.height/2)];
     
     UIButton *button               = [UIButton buttonWithType:UIButtonTypeCustom];
     button.titleLabel.font         = [UIFont boldSystemFontOfSize:15.0f];
@@ -64,10 +72,12 @@ NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpanding
     button.contentStretch          = CGRectMake(0.5, 0.5, 0, 0);
     button.contentMode             = UIViewContentModeScaleToFill;
     
-    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    [button setBackgroundImage:stretchableButtonImage forState:UIControlStateNormal];
     [button setTitle:buttonLabel forState:UIControlStateNormal];
     [button addTarget:self action:@selector(inputButtonPressed) forControlEvents:UIControlEventTouchDown];
     [button sizeToFit];
+    
+    self.innerBarButton = button;
     
     self.inputButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.inputButton.customView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
@@ -102,6 +112,8 @@ NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpanding
 -(id)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
+        [self setInputButtonImage:[UIImage imageNamed:@"buttonbg.png"]];
+        [self setBackgroundImage:[UIImage imageNamed:@"toolbarbg.png"]];
         [self setupToolbar:@"Send"];
     }
     return self;
@@ -118,9 +130,8 @@ NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpanding
 - (void)drawRect:(CGRect)rect 
 {
     /* Draw custon toolbar background */
-    UIImage *backgroundImage = [UIImage imageNamed:@"toolbarbg.png"];
-    backgroundImage = [backgroundImage stretchableImageWithLeftCapWidth:floorf(backgroundImage.size.width/2) topCapHeight:floorf(backgroundImage.size.height/2)];
-    [backgroundImage drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    UIImage *stretchableBackgroundImage = [self.backgroundImage stretchableImageWithLeftCapWidth:floorf(self.backgroundImage.size.width/2) topCapHeight:floorf(self.backgroundImage.size.height/2)];
+    [stretchableBackgroundImage drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     
     CGRect i = self.inputButton.customView.frame;
     i.origin.y = self.frame.size.height - i.size.height - 7;
@@ -181,5 +192,18 @@ NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpanding
         }
     }
 }
+
+-(void)setInputButtonImage:(UIImage *)inputButtonImage {
+    if (![_inputButtonImage isEqual:inputButtonImage]) {
+        [_inputButtonImage release];
+        _inputButtonImage = [inputButtonImage retain];
+        
+        if (self.innerBarButton) {
+            UIImage *stretchableButtonImage = [_inputButtonImage stretchableImageWithLeftCapWidth:floorf(_inputButtonImage.size.width/2) topCapHeight:floorf(_inputButtonImage.size.height/2)];
+            [self.innerBarButton setBackgroundImage:stretchableButtonImage forState:UIControlStateNormal];
+        }
+    }
+}
+
 
 @end

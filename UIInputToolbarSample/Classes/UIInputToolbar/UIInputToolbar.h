@@ -52,4 +52,7 @@ extern NSString * const CHExpandingTextViewWillChangeHeightNotification;
 @property (nonatomic) BOOL inputButtonShouldDisableForNoText;
 @property (assign) NSObject<UIInputToolbarDelegate> *delegate;
 
+@property (nonatomic, retain) UIImage *backgroundImage;
+@property (nonatomic, retain) UIImage *inputButtonImage;
+
 @end
