@@ -27,7 +27,12 @@
 
 NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpandingTextViewWillChangeHeight";
 
-@interface UIInputToolbar ()
+@interface UIInputToolbar () {
+    UIColor *characterCountIsValidTextColor;
+    UIColor *characterCountIsValidShadowColor;
+    UIColor *characterCountIsNotValidTextColor;
+    UIColor *characterCountIsNotValidShadowColor;
+}
 
 @property (nonatomic, retain) UIButton *innerBarButton;
 
@@ -95,12 +100,17 @@ NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpanding
     UIBarButtonItem *flexItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
     
     /* Add the character count label */
+    characterCountIsValidTextColor = [UIColor whiteColor];
+    characterCountIsValidShadowColor = [UIColor darkGrayColor];
+    characterCountIsNotValidTextColor = [UIColor redColor];
+    characterCountIsNotValidShadowColor = [UIColor clearColor];
+    
     characterCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(253, -5, 50, 40)];
     characterCountLabel.textAlignment = UITextAlignmentCenter;
     characterCountLabel.font = [UIFont boldSystemFontOfSize:12];
-    characterCountLabel.textColor = [UIColor darkGrayColor];
-    characterCountLabel.shadowColor = [UIColor whiteColor];
-    characterCountLabel.shadowOffset = CGSizeMake(0, 1);
+    characterCountLabel.textColor = characterCountIsValidTextColor;
+    characterCountLabel.shadowColor = characterCountIsValidShadowColor;
+    characterCountLabel.shadowOffset = CGSizeMake(0, -1);
     characterCountLabel.backgroundColor = [UIColor clearColor];
     
     [self addSubview:characterCountLabel];
@@ -184,10 +194,12 @@ NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpanding
         characterCountLabel.text = [NSString stringWithFormat:@"%i/%i",expandingTextView.text.length,characterLimit];
         
         if (expandingTextView.text.length > characterLimit) {
-            characterCountLabel.textColor = [UIColor redColor];
+            characterCountLabel.textColor = characterCountIsNotValidTextColor;
+            characterCountLabel.shadowColor = characterCountIsNotValidShadowColor;
             inputButton.enabled = NO;
         } else if (expandingTextView.text.length > 0) {
-            characterCountLabel.textColor = [UIColor darkGrayColor];
+            characterCountLabel.textColor = characterCountIsValidTextColor;
+            characterCountLabel.shadowColor = characterCountIsValidShadowColor;
             inputButton.enabled = YES;
         }
     }
