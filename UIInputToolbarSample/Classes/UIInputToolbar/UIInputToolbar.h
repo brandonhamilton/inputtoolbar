@@ -26,9 +26,13 @@
 #import <UIKit/UIKit.h>
 #import "UIExpandingTextView.h"
 
+@class UIInputToolbar;
+
 @protocol UIInputToolbarDelegate <NSObject>
 @optional
--(void)inputButtonPressed:(NSString *)inputText;
+-(void)inputToolbar:(UIInputToolbar*)inputToolbar buttonPressed:(NSString *)inputText;
+-(void)inputToolbar:(UIInputToolbar*)inputToolbar heightChanged:(CGFloat)newHeight;
+
 @end
 
 @interface UIInputToolbar : UIToolbar <UIExpandingTextViewDelegate> 
@@ -36,6 +40,7 @@
     UIExpandingTextView *textView;
     UIBarButtonItem *inputButton;
     NSObject <UIInputToolbarDelegate> *delegate;
+    CGFloat lastHeight;
 }
 
 - (void)drawRect:(CGRect)rect;

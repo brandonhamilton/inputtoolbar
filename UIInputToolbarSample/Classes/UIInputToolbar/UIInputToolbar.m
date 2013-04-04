@@ -33,13 +33,11 @@
 
 -(void)inputButtonPressed
 {
-    if ([delegate respondsToSelector:@selector(inputButtonPressed:)]) 
+    if ([delegate respondsToSelector:@selector(inputToolbar:buttonPressed:)]) 
     {
-        [delegate inputButtonPressed:self.textView.text];
+        [delegate inputToolbar:self buttonPressed:self.textView.text];
     }
     
-    /* Remove the keyboard and clear the text */
-    [self.textView resignFirstResponder];
     [self.textView clearText];
 }
 
@@ -126,7 +124,7 @@
 {
     /* Adjust the height of the toolbar when the input component expands */
     float diff = (textView.frame.size.height - height);
-    CGRect r = self.frame;
+    CGRect r = self.frame; 
     r.origin.y += diff;
     r.size.height -= diff;
     self.frame = r;
@@ -139,6 +137,22 @@
         self.inputButton.enabled = YES;
     else
         self.inputButton.enabled = NO;
+}
+
+-(BOOL)expandingTextViewShouldReturn:(UIExpandingTextView *)expandingTextView {
+    return YES;
+}
+    
+- (void)setFrame:(CGRect)frame {
+    if (lastHeight != frame.size.height) {
+        if ([delegate respondsToSelector:@selector(inputToolbar:heightChanged:)]) 
+        {
+            [delegate inputToolbar:self heightChanged:frame.size.height];
+        }
+        lastHeight = frame.size.height;
+    }
+    
+    [super setFrame:frame];
 }
 
 @end
