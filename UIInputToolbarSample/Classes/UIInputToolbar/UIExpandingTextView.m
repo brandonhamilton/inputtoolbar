@@ -272,8 +272,6 @@
     {
 		[delegate expandingTextViewDidChange:self];
 	}
-
-	
 }
 
 -(void)growDidStop
@@ -288,6 +286,12 @@
 {
 	[super resignFirstResponder];
 	return [internalTextView resignFirstResponder];
+}
+
+- (BOOL)becomeFirstResponder
+{
+    [super becomeFirstResponder];
+    return [internalTextView becomeFirstResponder];
 }
 
 - (void)dealloc 
