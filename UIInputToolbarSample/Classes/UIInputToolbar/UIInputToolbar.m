@@ -25,6 +25,8 @@
 
 #import "UIInputToolbar.h"
 
+#define ScreenWidth [[UIScreen mainScreen] bounds].size.width
+
 @implementation UIInputToolbar
 
 @synthesize textView;
@@ -41,6 +43,17 @@
     /* Remove the keyboard and clear the text */
     [self.textView resignFirstResponder];
     [self.textView clearText];
+}
+
+- (BOOL)resignFirstResponder
+{
+    [self.textView clearText];
+    return [self.textView resignFirstResponder];
+}
+
+- (BOOL)becomeFirstResponder
+{
+    return [self.textView becomeFirstResponder];
 }
 
 -(void)setupToolbar:(NSString *)buttonLabel
@@ -70,9 +83,9 @@
     self.inputButton.enabled = NO;
 
     /* Create UIExpandingTextView input */
-    self.textView = [[[UIExpandingTextView alloc] initWithFrame:CGRectMake(7, 7, 236, 26)] autorelease];
+    self.textView = [[[UIExpandingTextView alloc] initWithFrame:CGRectMake(7, 7, ScreenWidth - button.frame.size.width - 30, 26)] autorelease];
     self.textView.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(4.0f, 0.0f, 10.0f, 0.0f);
-    self.textView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+    self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.textView.delegate = self;
     [self addSubview:self.textView];
     
@@ -86,7 +99,7 @@
 -(id)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
-        [self setupToolbar:@"Send"];
+        [self setupToolbar:NSLocalizedString(@"Send", nil)];
     }
     return self;
 }
@@ -94,7 +107,7 @@
 -(id)init
 {
     if ((self = [super init])) {
-        [self setupToolbar:@"Send"];
+        [self setupToolbar:NSLocalizedString(@"Send", nil)];
     }
     return self;
 }
@@ -117,7 +130,6 @@
     [inputButton release];
     [super dealloc];
 }
-
 
 #pragma mark -
 #pragma mark UIExpandingTextView delegate

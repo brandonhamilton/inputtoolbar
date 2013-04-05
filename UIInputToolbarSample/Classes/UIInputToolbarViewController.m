@@ -25,10 +25,8 @@
 
 #import "UIInputToolbarViewController.h"
 
-#define kStatusBarHeight 20
+#define kStatusBarHeight      [UIApplication sharedApplication].statusBarFrame.size.height
 #define kDefaultToolbarHeight 40
-#define kKeyboardHeightPortrait 216
-#define kKeyboardHeightLandscape 140
 
 @implementation UIInputToolbarViewController
 
@@ -45,23 +43,17 @@
 - (void)loadView
 {
     [super loadView];
-
-    keyboardIsVisible = NO;
     
     /* Calculate screen size */
     CGRect screenFrame = [[UIScreen mainScreen] applicationFrame];
     self.view = [[UIView alloc] initWithFrame:screenFrame];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     /* Create toolbar */
     self.inputToolbar = [[UIInputToolbar alloc] initWithFrame:CGRectMake(0, screenFrame.size.height-kDefaultToolbarHeight, screenFrame.size.width, kDefaultToolbarHeight)];
     [self.view addSubview:self.inputToolbar];
     inputToolbar.delegate = self;
-    inputToolbar.textView.placeholder = @"Placeholder";
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
+    inputToolbar.textView.placeholder = NSLocalizedString(@"Placeholder", nil);
 }
 
 - (void)viewWillAppear:(BOOL)animated 
@@ -70,14 +62,15 @@
 	/* Listen for keyboard */
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
+    [inputToolbar becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated 
 {
 	[super viewWillDisappear:animated];
 	/* No longer listen for keyboard */
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -85,65 +78,55 @@
     return YES;
 }
 
--(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{	
+- (void)updateInputViewFrame {
     CGRect screenFrame = [[UIScreen mainScreen] applicationFrame];
-    CGRect r = self.inputToolbar.frame;
-	if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
-    {
-        r.origin.y = screenFrame.size.height - self.inputToolbar.frame.size.height - kStatusBarHeight;
-        if (keyboardIsVisible) {
-            r.origin.y -= kKeyboardHeightPortrait;
-        }
-        [self.inputToolbar.textView setMaximumNumberOfLines:13]; 
-	}
-	else
-    {
-        r.origin.y = screenFrame.size.width - self.inputToolbar.frame.size.height - kStatusBarHeight;
-        if (keyboardIsVisible) {
-            r.origin.y -= kKeyboardHeightLandscape;
-        }
-        [self.inputToolbar.textView setMaximumNumberOfLines:7];
-        [self.inputToolbar.textView sizeToFit];
-    }
-    self.inputToolbar.frame = r;
-}
-
-#pragma mark -
-#pragma mark Notifications
-
-- (void)keyboardWillShow:(NSNotification *)notification 
-{
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
     /* Move the toolbar to above the keyboard */
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.3];
 	CGRect frame = self.inputToolbar.frame;
-    if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-        frame.origin.y = self.view.frame.size.height - frame.size.height - kKeyboardHeightPortrait;
+    
+    if (UIInterfaceOrientationIsPortrait(orientation)) {
+        frame.origin.y = screenFrame.size.height - frame.size.height - keyboardHeight;
     }
     else {
-        frame.origin.y = self.view.frame.size.width - frame.size.height - kKeyboardHeightLandscape - kStatusBarHeight;
+        frame.origin.y = screenFrame.size.width - frame.size.height - keyboardHeight;
     }
-	self.inputToolbar.frame = frame;
-	[UIView commitAnimations];
-    keyboardIsVisible = YES;
+    
+    self.inputToolbar.frame = frame;
+}
+
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self updateInputViewFrame];
+
+    if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
+        [self.inputToolbar.textView setMaximumNumberOfLines:7];
+    }
+    else {
+        [self.inputToolbar.textView setMaximumNumberOfLines:7];
+    }    
+}
+
+#pragma mark -
+#pragma mark Notifications
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    keyboardHeight = UIInterfaceOrientationIsPortrait(orientation) ? kbSize.height : kbSize.width;
+    
+    [self updateInputViewFrame];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification 
 {
-    /* Move the toolbar back to bottom of the screen */
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.3];
-	CGRect frame = self.inputToolbar.frame;
-    if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-        frame.origin.y = self.view.frame.size.height - frame.size.height;
-    }
-    else {
-        frame.origin.y = self.view.frame.size.width - frame.size.height;
-    }
-	self.inputToolbar.frame = frame;
-	[UIView commitAnimations];
-    keyboardIsVisible = NO;
+    keyboardHeight = 0;
+    
+    [self updateInputViewFrame];
 }
 
 -(void)inputButtonPressed:(NSString *)inputText

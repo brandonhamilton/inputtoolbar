@@ -39,6 +39,8 @@
 }
 
 - (void)drawRect:(CGRect)rect;
+- (BOOL)resignFirstResponder;
+- (BOOL)becomeFirstResponder;
 
 @property (nonatomic, retain) UIExpandingTextView *textView;
 @property (nonatomic, retain) UIBarButtonItem *inputButton;

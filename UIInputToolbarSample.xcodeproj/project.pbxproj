@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0269C506170D6064006A6E46 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0269C504170D6064006A6E46 /* MainWindow-iPad.xib */; };
 		CA0C9C30137879DA0097DB28 /* UIExpandingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0C9C27137879DA0097DB28 /* UIExpandingTextView.m */; };
 		CA0C9C31137879DA0097DB28 /* UIExpandingTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0C9C29137879DA0097DB28 /* UIExpandingTextViewInternal.m */; };
 		CA0C9C32137879DA0097DB28 /* UIInputToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0C9C2B137879DA0097DB28 /* UIInputToolbar.m */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0269C505170D6064006A6E46 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		CA0C9C26137879DA0097DB28 /* UIExpandingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIExpandingTextView.h; sourceTree = "<group>"; };
 		CA0C9C27137879DA0097DB28 /* UIExpandingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIExpandingTextView.m; sourceTree = "<group>"; };
 		CA0C9C28137879DA0097DB28 /* UIExpandingTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIExpandingTextViewInternal.h; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				FF4851E615C67D47003829EC /* toolbarbg.png */,
 				FF4851E715C67D47003829EC /* toolbarbg@2x.png */,
 				CA3A7BA313708CDF00CF5E6B /* MainWindow.xib */,
+				0269C504170D6064006A6E46 /* MainWindow-iPad.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 				FF4851EB15C67D47003829EC /* textbg@2x.png in Resources */,
 				FF4851EC15C67D47003829EC /* toolbarbg.png in Resources */,
 				FF4851ED15C67D47003829EC /* toolbarbg@2x.png in Resources */,
+				0269C506170D6064006A6E46 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +237,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		0269C504170D6064006A6E46 /* MainWindow-iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0269C505170D6064006A6E46 /* en */,
+			);
+			name = "MainWindow-iPad.xib";
+			sourceTree = "<group>";
+		};
 		CA3A7B9A13708CDE00CF5E6B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -293,7 +305,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIInputToolbarSample/UIInputToolbarSample-Prefix.pch";
 				INFOPLIST_FILE = "UIInputToolbarSample/UIInputToolbarSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -306,7 +320,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIInputToolbarSample/UIInputToolbarSample-Prefix.pch";
 				INFOPLIST_FILE = "UIInputToolbarSample/UIInputToolbarSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
