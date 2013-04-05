@@ -27,7 +27,6 @@
 
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
 
-
 @implementation UIInputToolbar
 
 @synthesize textView;
@@ -84,9 +83,9 @@
     self.inputButton.enabled = NO;
 
     /* Create UIExpandingTextView input */
-    self.textView = [[[UIExpandingTextView alloc] initWithFrame:CGRectMake(7, 7, ScreenWidth - 90, 26)] autorelease];
+    self.textView = [[[UIExpandingTextView alloc] initWithFrame:CGRectMake(7, 7, ScreenWidth - button.frame.size.width - 30, 26)] autorelease];
     self.textView.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(4.0f, 0.0f, 10.0f, 0.0f);
-    self.textView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+    self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.textView.delegate = self;
     [self addSubview:self.textView];
     
@@ -131,7 +130,6 @@
     [inputButton release];
     [super dealloc];
 }
-
 
 #pragma mark -
 #pragma mark UIExpandingTextView delegate

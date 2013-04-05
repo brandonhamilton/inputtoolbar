@@ -30,7 +30,6 @@
     UIInputToolbar *inputToolbar;
     
     @private
-    BOOL keyboardIsVisible;
     float keyboardHeight;
 }
 
