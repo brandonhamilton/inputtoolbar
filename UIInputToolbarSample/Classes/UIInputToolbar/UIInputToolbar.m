@@ -45,16 +45,16 @@ NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpanding
 @synthesize characterLimit;
 @synthesize inputButton;
 @synthesize inputButtonShouldDisableForNoText;
-@synthesize delegate;
+@synthesize inputDelegate;
 @synthesize backgroundImage;
 @synthesize inputButtonImage=_inputButtonImage;
 @synthesize innerBarButton;
 
 -(void)inputButtonPressed
 {
-    if ([delegate respondsToSelector:@selector(inputButtonPressed:)]) 
+    if ([inputDelegate respondsToSelector:@selector(inputButtonPressed:)]) 
     {
-        [delegate inputButtonPressed:self.textView.text];
+        [inputDelegate inputButtonPressed:self.textView.text];
     }
     
     /* Remove the keyboard and clear the text */

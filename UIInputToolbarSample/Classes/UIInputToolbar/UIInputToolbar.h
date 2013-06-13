@@ -41,7 +41,7 @@ extern NSString * const CHExpandingTextViewWillChangeHeightNotification;
     UIExpandingTextView *textView;
     UIBarButtonItem *inputButton;
     UILabel *characterCountLabel;
-    NSObject <UIInputToolbarDelegate> *delegate;
+    id <UIInputToolbarDelegate> inputDelegate;
 }
 
 - (void)drawRect:(CGRect)rect;
@@ -50,7 +50,7 @@ extern NSString * const CHExpandingTextViewWillChangeHeightNotification;
 @property (nonatomic) NSInteger characterLimit;
 @property (nonatomic, retain) UIBarButtonItem *inputButton;
 @property (nonatomic) BOOL inputButtonShouldDisableForNoText;
-@property (assign) NSObject<UIInputToolbarDelegate> *delegate;
+@property (nonatomic, assign) id<UIInputToolbarDelegate> inputDelegate;
 
 @property (nonatomic, retain) UIImage *backgroundImage;
 @property (nonatomic, retain) UIImage *inputButtonImage;
