@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "InputToolbar"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "Messages style input toolbar for iOS."
   s.homepage     = "https://github.com/brandonhamilton/inputtoolbar"
   s.license      = 'MIT'
@@ -9,4 +9,5 @@ Pod::Spec.new do |s|
   s.platform     = :ios
   s.source_files = 'UIInputToolbarSample/Classes/UIInputToolbar'
   s.resources = "UIInputToolbarSample/Resources/*.png"
+  s.requires_arc = true
 end

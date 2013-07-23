@@ -48,44 +48,23 @@
 @end
 
 @interface UIExpandingTextView : UIView <UITextViewDelegate>
-{
-    UIExpandingTextViewInternal *internalTextView;
-    UIImageView *textViewBackgroundImage;
-    int minimumHeight;
-	int maximumHeight;
-    int maximumNumberOfLines;
-	int minimumNumberOfLines;
-	BOOL animateHeightChange;
-	NSObject <UIExpandingTextViewDelegate> *delegate;
-	NSString *text;
-	UIFont *font;
-	UIColor *textColor;
-	UITextAlignment textAlignment;
-	NSRange selectedRange;
-	BOOL editable;
-	UIDataDetectorTypes dataDetectorTypes;
-	UIReturnKeyType returnKeyType;
-    BOOL forceSizeUpdate;
-    NSString *placeholder;
-    UILabel *placeholderLabel;
-}
 
-@property (nonatomic, retain) UITextView *internalTextView;
+@property (nonatomic, strong) UITextView *internalTextView;
 
-@property int maximumNumberOfLines;
-@property int minimumNumberOfLines;
-@property BOOL animateHeightChange;
+@property (nonatomic, assign) int maximumNumberOfLines;
+@property (nonatomic, assign) int minimumNumberOfLines;
+@property (nonatomic, assign) BOOL animateHeightChange;
 
-@property (nonatomic, weak) NSObject<UIExpandingTextViewDelegate> *delegate;
-@property (nonatomic,assign) NSString *text;
-@property (nonatomic,assign) UIFont *font;
-@property (nonatomic,assign) UIColor *textColor;
+@property (weak, nonatomic) NSObject<UIExpandingTextViewDelegate> *delegate;
+@property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy) UIFont *font;
+@property (nonatomic, copy) UIColor *textColor;
 @property (nonatomic) UITextAlignment textAlignment;
 @property (nonatomic) NSRange selectedRange;
 @property (nonatomic,getter=isEditable) BOOL editable;
 @property (nonatomic) UIDataDetectorTypes dataDetectorTypes __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_3_0);
 @property (nonatomic) UIReturnKeyType returnKeyType;
-@property (nonatomic, retain) UIImageView *textViewBackgroundImage;
+@property (nonatomic, strong) UIImageView *textViewBackgroundImage;
 @property (nonatomic,copy) NSString *placeholder;
 - (BOOL)hasText;
 - (void)scrollRangeToVisible:(NSRange)range;

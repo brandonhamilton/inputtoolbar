@@ -32,16 +32,11 @@
 @end
 
 @interface UIInputToolbar : UIToolbar <UIExpandingTextViewDelegate>
-{
-    UIExpandingTextView *textView;
-    UIBarButtonItem *inputButton;
-    NSObject <UIInputToolbarDelegate> *delegate;
-}
 
 - (void)drawRect:(CGRect)rect;
 
-@property (nonatomic, retain) UIExpandingTextView *textView;
-@property (nonatomic, retain) UIBarButtonItem *inputButton;
+@property (nonatomic, strong) UIExpandingTextView *textView;
+@property (nonatomic, strong) UIBarButtonItem *inputButton;
 @property (nonatomic, weak) NSObject<UIInputToolbarDelegate> *inputDelegate;
 
 @end
