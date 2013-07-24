@@ -120,6 +120,9 @@
     r.origin.y += diff;
     r.size.height -= diff;
     self.frame = r;
+    if ([self.inputDelegate respondsToSelector:_cmd]) {
+        [self.inputDelegate expandingTextView:expandingTextView willChangeHeight:height];
+    }
 }
 
 -(void)expandingTextViewDidChange:(UIExpandingTextView *)expandingTextView
@@ -129,7 +132,69 @@
         self.inputButton.enabled = YES;
     else
         self.inputButton.enabled = NO;
-    if ([self.inputDelegate respondsToSelector:@selector(expandingTextViewDidChange:)]) [self.inputDelegate expandingTextViewDidChange:expandingTextView];
+    if ([self.inputDelegate respondsToSelector:@selector(expandingTextViewDidChange:)])
+        [self.inputDelegate expandingTextViewDidChange:expandingTextView];
+}
+
+- (BOOL)expandingTextViewShouldReturn:(UIExpandingTextView *)expandingTextView
+{
+    if ([self.inputDelegate respondsToSelector:_cmd]) {
+        return [self.inputDelegate expandingTextViewShouldReturn:expandingTextView];
+    }
+    
+    return YES;
+}
+
+- (BOOL)expandingTextViewShouldBeginEditing:(UIExpandingTextView *)expandingTextView
+{
+    if ([self.inputDelegate respondsToSelector:_cmd]) {
+        return [self.inputDelegate expandingTextViewShouldBeginEditing:expandingTextView];
+    }
+    return YES;
+}
+
+- (BOOL)expandingTextViewShouldEndEditing:(UIExpandingTextView *)expandingTextView
+{
+    if ([self.inputDelegate respondsToSelector:_cmd]) {
+        return [self.inputDelegate expandingTextViewShouldEndEditing:expandingTextView];
+    }
+    return YES;
+}
+
+- (void)expandingTextViewDidBeginEditing:(UIExpandingTextView *)expandingTextView
+{
+    if ([self.inputDelegate respondsToSelector:_cmd]) {
+        [self.inputDelegate expandingTextViewDidBeginEditing:expandingTextView];
+    }
+}
+
+- (void)expandingTextViewDidEndEditing:(UIExpandingTextView *)expandingTextView
+{
+    if ([self.inputDelegate respondsToSelector:_cmd]) {
+        [self.inputDelegate expandingTextViewDidEndEditing:expandingTextView];
+    }
+}
+
+- (BOOL)expandingTextView:(UIExpandingTextView *)expandingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([self.inputDelegate respondsToSelector:_cmd]) {
+        return [self.inputDelegate expandingTextView:expandingTextView shouldChangeTextInRange:range replacementText:text];
+    }
+    return YES;
+}
+
+- (void)expandingTextView:(UIExpandingTextView *)expandingTextView didChangeHeight:(float)height
+{
+    if ([self.inputDelegate respondsToSelector:_cmd]) {
+        [self.inputDelegate expandingTextView:expandingTextView didChangeHeight:height];
+    }
+}
+
+- (void)expandingTextViewDidChangeSelection:(UIExpandingTextView *)expandingTextView
+{
+    if ([self.inputDelegate respondsToSelector:_cmd]) {
+        [self.inputDelegate expandingTextViewDidChangeSelection:expandingTextView];
+    }
 }
 
 @end
