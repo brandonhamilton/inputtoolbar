@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C05D8F1317A0049E00632A60 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C05D8F1217A0049E00632A60 /* Default-568h@2x.png */; };
 		CA0C9C30137879DA0097DB28 /* UIExpandingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0C9C27137879DA0097DB28 /* UIExpandingTextView.m */; };
 		CA0C9C31137879DA0097DB28 /* UIExpandingTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0C9C29137879DA0097DB28 /* UIExpandingTextViewInternal.m */; };
 		CA0C9C32137879DA0097DB28 /* UIInputToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0C9C2B137879DA0097DB28 /* UIInputToolbar.m */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C05D8F1217A0049E00632A60 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CA0C9C26137879DA0097DB28 /* UIExpandingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIExpandingTextView.h; sourceTree = "<group>"; };
 		CA0C9C27137879DA0097DB28 /* UIExpandingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIExpandingTextView.m; sourceTree = "<group>"; };
 		CA0C9C28137879DA0097DB28 /* UIExpandingTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIExpandingTextViewInternal.h; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		CA3A7B8213708CDE00CF5E6B = {
 			isa = PBXGroup;
 			children = (
+				C05D8F1217A0049E00632A60 /* Default-568h@2x.png */,
 				CA3A7B9713708CDE00CF5E6B /* UIInputToolbarSample */,
 				CA3A7B9013708CDE00CF5E6B /* Frameworks */,
 				CA3A7B8E13708CDE00CF5E6B /* Products */,
@@ -181,6 +184,9 @@
 /* Begin PBXProject section */
 		CA3A7B8413708CDE00CF5E6B /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
 			buildConfigurationList = CA3A7B8713708CDE00CF5E6B /* Build configuration list for PBXProject "UIInputToolbarSample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -211,6 +217,7 @@
 				FF4851EB15C67D47003829EC /* textbg@2x.png in Resources */,
 				FF4851EC15C67D47003829EC /* toolbarbg.png in Resources */,
 				FF4851ED15C67D47003829EC /* toolbarbg@2x.png in Resources */,
+				C05D8F1317A0049E00632A60 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +263,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -273,6 +281,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -288,11 +297,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIInputToolbarSample/UIInputToolbarSample-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "UIInputToolbarSample/UIInputToolbarSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -302,10 +314,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIInputToolbarSample/UIInputToolbarSample-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "UIInputToolbarSample/UIInputToolbarSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
