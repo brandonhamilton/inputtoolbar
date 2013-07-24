@@ -34,12 +34,6 @@
 
 @synthesize inputToolbar;
 
-- (void)dealloc
-{
-    [inputToolbar release];
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)loadView
@@ -55,7 +49,7 @@
     /* Create toolbar */
     self.inputToolbar = [[UIInputToolbar alloc] initWithFrame:CGRectMake(0, screenFrame.size.height-kDefaultToolbarHeight, screenFrame.size.width, kDefaultToolbarHeight)];
     [self.view addSubview:self.inputToolbar];
-    inputToolbar.delegate = self;
+    inputToolbar.inputDelegate = self;
     inputToolbar.textView.placeholder = @"Placeholder";
 }
 

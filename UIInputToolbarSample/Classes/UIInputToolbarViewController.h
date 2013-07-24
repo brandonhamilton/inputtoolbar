@@ -33,5 +33,5 @@
     BOOL keyboardIsVisible;
 }
 
-@property (nonatomic, retain) UIInputToolbar *inputToolbar;
+@property (nonatomic, strong) UIInputToolbar *inputToolbar;
 @end
