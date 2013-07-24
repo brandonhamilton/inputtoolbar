@@ -55,7 +55,7 @@
 @property (nonatomic, assign) int minimumNumberOfLines;
 @property (nonatomic, assign) BOOL animateHeightChange;
 
-@property (weak, nonatomic) NSObject<UIExpandingTextViewDelegate> *delegate;
+@property (nonatomic, weak) id<UIExpandingTextViewDelegate> delegate;
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, copy) UIFont *font;
 @property (nonatomic, copy) UIColor *textColor;

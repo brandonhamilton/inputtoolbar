@@ -37,6 +37,6 @@
 
 @property (nonatomic, strong) UIExpandingTextView *textView;
 @property (nonatomic, strong) UIBarButtonItem *inputButton;
-@property (nonatomic, weak) NSObject<UIInputToolbarDelegate> *inputDelegate;
+@property (nonatomic, weak) id<UIInputToolbarDelegate> inputDelegate;
 
 @end

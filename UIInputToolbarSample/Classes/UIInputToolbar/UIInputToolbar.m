@@ -27,9 +27,6 @@
 
 @implementation UIInputToolbar
 
-@synthesize textView;
-@synthesize inputButton;
-
 -(void)inputButtonPressed
 {
     if ([self.inputDelegate respondsToSelector:@selector(inputButtonPressed:)])
@@ -118,7 +115,7 @@
 -(void)expandingTextView:(UIExpandingTextView *)expandingTextView willChangeHeight:(float)height
 {
     /* Adjust the height of the toolbar when the input component expands */
-    float diff = (textView.frame.size.height - height);
+    float diff = (self.textView.frame.size.height - height);
     CGRect r = self.frame;
     r.origin.y += diff;
     r.size.height -= diff;
