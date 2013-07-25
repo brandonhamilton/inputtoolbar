@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "InputToolbar"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "Messages style input toolbar for iOS."
   s.homepage     = "https://github.com/brandonhamilton/inputtoolbar"
   s.license      = 'MIT'
