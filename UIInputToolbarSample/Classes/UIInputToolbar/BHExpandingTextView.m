@@ -28,23 +28,23 @@
  *  http://www.hanspinckaers.com/multi-line-uitextview-similar-to-sms
  */
 
-#import "UIExpandingTextView.h"
+#import "BHExpandingTextView.h"
 
 #define kTextInsetX 4
 #define kTextInsetBottom 0
 
-@interface UIExpandingTextView ()
+@interface BHExpandingTextView ()
 
 @property (nonatomic, strong) UILabel *placeholderLabel;
 
-@property (nonatomic, assign) int minimumHeight;
-@property (nonatomic, assign) int maximumHeight;
+@property (nonatomic, assign) CGFloat minimumHeight;
+@property (nonatomic, assign) CGFloat maximumHeight;
 
 @property (nonatomic, assign) BOOL forceSizeUpdate;
 
 @end
 
-@implementation UIExpandingTextView
+@implementation BHExpandingTextView
 
 - (void)setPlaceholder:(NSString *)placeholders
 {
@@ -65,7 +65,7 @@
         CGRect textViewFrame = CGRectInset(backgroundFrame, kTextInsetX, 0);
 
         /* Internal Text View component */
-		self.internalTextView = [[UIExpandingTextViewInternal alloc] initWithFrame:textViewFrame];
+		self.internalTextView = [[BHExpandingTextViewInternal alloc] initWithFrame:textViewFrame];
 		self.internalTextView.delegate        = self;
 		self.internalTextView.font            = [UIFont systemFontOfSize:15.0];
 		self.internalTextView.contentInset    = UIEdgeInsetsMake(-4,0,-4,0);
@@ -138,7 +138,7 @@
     [self textViewDidChange:self.internalTextView];
 }
 
--(void)setMaximumNumberOfLines:(int)n
+-(void)setMaximumNumberOfLines:(NSUInteger)n
 {
     BOOL didChange            = NO;
     NSString *saveText        = self.internalTextView.text;
@@ -162,7 +162,7 @@
     }
 }
 
--(void)setMinimumNumberOfLines:(int)m
+-(void)setMinimumNumberOfLines:(NSUInteger)m
 {
     NSString *saveText        = self.internalTextView.text;
     NSString *newText         = @"-";

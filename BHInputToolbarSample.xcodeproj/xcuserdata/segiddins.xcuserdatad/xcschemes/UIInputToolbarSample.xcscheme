@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CA3A7B8C13708CDE00CF5E6B"
                BuildableName = "UIInputToolbarSample.app"
-               BlueprintName = "UIInputToolbarSample"
-               ReferencedContainer = "container:UIInputToolbarSample.xcodeproj">
+               BlueprintName = "BHInputToolbarSample"
+               ReferencedContainer = "container:BHInputToolbarSample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CA3A7B8C13708CDE00CF5E6B"
             BuildableName = "UIInputToolbarSample.app"
-            BlueprintName = "UIInputToolbarSample"
-            ReferencedContainer = "container:UIInputToolbarSample.xcodeproj">
+            BlueprintName = "BHInputToolbarSample"
+            ReferencedContainer = "container:BHInputToolbarSample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -53,8 +53,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CA3A7B8C13708CDE00CF5E6B"
             BuildableName = "UIInputToolbarSample.app"
-            BlueprintName = "UIInputToolbarSample"
-            ReferencedContainer = "container:UIInputToolbarSample.xcodeproj">
+            BlueprintName = "BHInputToolbarSample"
+            ReferencedContainer = "container:BHInputToolbarSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -71,8 +71,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CA3A7B8C13708CDE00CF5E6B"
             BuildableName = "UIInputToolbarSample.app"
-            BlueprintName = "UIInputToolbarSample"
-            ReferencedContainer = "container:UIInputToolbarSample.xcodeproj">
+            BlueprintName = "BHInputToolbarSample"
+            ReferencedContainer = "container:BHInputToolbarSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
