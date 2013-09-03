@@ -25,6 +25,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIExpandingTextViewInternal : UITextView { }
+@interface BHExpandingTextViewInternal : UITextView { }
 
 @end

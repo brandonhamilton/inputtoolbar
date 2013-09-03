@@ -1,19 +1,19 @@
 /*
- *  UIInputToolbar.h
- *
+ *  UIInputToolbarSampleAppDelegate.m
+ *  
  *  Created by Brandon Hamilton on 2011/05/03.
  *  Copyright 2011 Brandon Hamilton.
- *
+ *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
  *  in the Software without restriction, including without limitation the rights
  *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  *  copies of the Software, and to permit persons to whom the Software is
  *  furnished to do so, subject to the following conditions:
- *
+ *  
  *  The above copyright notice and this permission notice shall be included in
  *  all copies or substantial portions of the Software.
- *
+ *  
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,20 +23,20 @@
  *  THE SOFTWARE.
  */
 
-#import <UIKit/UIKit.h>
-#import "UIExpandingTextView.h"
+#import "BHInputToolbarSampleAppDelegate.h"
 
-@protocol UIInputToolbarDelegate <UIExpandingTextViewDelegate>
-@optional
--(void)inputButtonPressed:(NSString *)inputText;
-@end
+@implementation BHInputToolbarSampleAppDelegate
 
-@interface UIInputToolbar : UIToolbar <UIExpandingTextViewDelegate>
 
-- (void)drawRect:(CGRect)rect;
+@synthesize window=_window;
+@synthesize viewController;
 
-@property (nonatomic, strong) UIExpandingTextView *textView;
-@property (nonatomic, strong) UIBarButtonItem *inputButton;
-@property (nonatomic, weak) id<UIInputToolbarDelegate> inputDelegate;
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    self.viewController = [[BHInputToolbarViewController alloc] init];
+    [self.window setRootViewController:self.viewController];
+    [self.window makeKeyAndVisible];
+    return YES;
+}
 
 @end

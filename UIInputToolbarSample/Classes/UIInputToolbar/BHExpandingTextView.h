@@ -24,38 +24,38 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "UIExpandingTextViewInternal.h"
+#import "BHExpandingTextViewInternal.h"
 
-@class UIExpandingTextView;
+@class BHExpandingTextView;
 
-@protocol UIExpandingTextViewDelegate <NSObject>
+@protocol BHExpandingTextViewDelegate <NSObject>
 
 @optional
-- (BOOL)expandingTextViewShouldBeginEditing:(UIExpandingTextView *)expandingTextView;
-- (BOOL)expandingTextViewShouldEndEditing:(UIExpandingTextView *)expandingTextView;
+- (BOOL)expandingTextViewShouldBeginEditing:(BHExpandingTextView *)expandingTextView;
+- (BOOL)expandingTextViewShouldEndEditing:(BHExpandingTextView *)expandingTextView;
 
-- (void)expandingTextViewDidBeginEditing:(UIExpandingTextView *)expandingTextView;
-- (void)expandingTextViewDidEndEditing:(UIExpandingTextView *)expandingTextView;
+- (void)expandingTextViewDidBeginEditing:(BHExpandingTextView *)expandingTextView;
+- (void)expandingTextViewDidEndEditing:(BHExpandingTextView *)expandingTextView;
 
-- (BOOL)expandingTextView:(UIExpandingTextView *)expandingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
-- (void)expandingTextViewDidChange:(UIExpandingTextView *)expandingTextView;
+- (BOOL)expandingTextView:(BHExpandingTextView *)expandingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
+- (void)expandingTextViewDidChange:(BHExpandingTextView *)expandingTextView;
 
-- (void)expandingTextView:(UIExpandingTextView *)expandingTextView willChangeHeight:(float)height;
-- (void)expandingTextView:(UIExpandingTextView *)expandingTextView didChangeHeight:(float)height;
+- (void)expandingTextView:(BHExpandingTextView *)expandingTextView willChangeHeight:(float)height;
+- (void)expandingTextView:(BHExpandingTextView *)expandingTextView didChangeHeight:(float)height;
 
-- (void)expandingTextViewDidChangeSelection:(UIExpandingTextView *)expandingTextView;
-- (BOOL)expandingTextViewShouldReturn:(UIExpandingTextView *)expandingTextView;
+- (void)expandingTextViewDidChangeSelection:(BHExpandingTextView *)expandingTextView;
+- (BOOL)expandingTextViewShouldReturn:(BHExpandingTextView *)expandingTextView;
 @end
 
-@interface UIExpandingTextView : UIView <UITextViewDelegate>
+@interface BHExpandingTextView : UIView <UITextViewDelegate>
 
 @property (nonatomic, strong) UITextView *internalTextView;
 
-@property (nonatomic, assign) int maximumNumberOfLines;
-@property (nonatomic, assign) int minimumNumberOfLines;
+@property (nonatomic, assign) NSUInteger maximumNumberOfLines;
+@property (nonatomic, assign) NSUInteger minimumNumberOfLines;
 @property (nonatomic, assign) BOOL animateHeightChange;
 
-@property (nonatomic, weak) id<UIExpandingTextViewDelegate> delegate;
+@property (nonatomic, weak) id<BHExpandingTextViewDelegate> delegate;
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, copy) UIFont *font;
 @property (nonatomic, copy) UIColor *textColor;
