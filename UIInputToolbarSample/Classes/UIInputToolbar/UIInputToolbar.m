@@ -100,7 +100,11 @@ NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpanding
     UIBarButtonItem *flexItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
     
     /* Add the character count label */
-    characterCountIsValidTextColor = [UIColor whiteColor];
+    if ([UIInputToolbar isIOS7AndUp]) {
+        characterCountIsValidTextColor = [UIColor blackColor];
+    } else {
+        characterCountIsValidTextColor = [UIColor whiteColor];
+    }
     characterCountIsValidShadowColor = [UIColor darkGrayColor];
     characterCountIsNotValidTextColor = [UIColor redColor];
     characterCountIsNotValidShadowColor = [UIColor clearColor];
@@ -123,7 +127,9 @@ NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpanding
 {
     if ((self = [super initWithFrame:frame])) {
         [self setInputButtonImage:[UIImage imageNamed:@"buttonbg.png"]];
-        [self setBackgroundImage:[UIImage imageNamed:@"toolbarbg.png"]];
+
+        [self setupBackgroundImage];
+
         [self setupToolbar:@"Send"];
     }
     return self;
@@ -137,15 +143,25 @@ NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpanding
     return self;
 }
 
-- (void)drawRect:(CGRect)rect 
-{
-    /* Draw custon toolbar background */
-    UIImage *stretchableBackgroundImage = [self.backgroundImage stretchableImageWithLeftCapWidth:floorf(self.backgroundImage.size.width/2) topCapHeight:floorf(self.backgroundImage.size.height/2)];
-    [stretchableBackgroundImage drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    
-    CGRect i = self.inputButton.customView.frame;
-    i.origin.y = self.frame.size.height - i.size.height - 7;
-    self.inputButton.customView.frame = i;
+- (void)setupBackgroundImage {
+    UIImage * toolbarBackgroundImage = [UIImage imageNamed:@"toolbarbg"];
+    CGFloat imageWidth = toolbarBackgroundImage.size.width;
+    CGFloat imageHeight = toolbarBackgroundImage.size.height;
+    UIEdgeInsets insetsForResize = UIEdgeInsetsMake(imageHeight/2, imageWidth/2, imageHeight/2, imageWidth/2);
+    toolbarBackgroundImage = [toolbarBackgroundImage resizableImageWithCapInsets:insetsForResize];
+    [self setBackgroundImage:toolbarBackgroundImage forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+
+    CGRect frame = self.textView.frame;
+    frame.size.height = self.frame.size.height - 7;
+    self.textView.frame = frame;
+
+    frame = self.inputButton.customView.frame;
+    frame.origin.y = self.frame.size.height - frame.size.height - 7;
+    self.inputButton.customView.frame = frame;
 }
 
 - (void)dealloc
@@ -217,5 +233,9 @@ NSString * const CHExpandingTextViewWillChangeHeightNotification = @"CHExpanding
     }
 }
 
+#pragma mark -- for iOS7
++ (BOOL)isIOS7AndUp {
+    return (floor(NSFoundationVersionNumber) > 993.00);
+}
 
 @end

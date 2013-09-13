@@ -27,8 +27,9 @@
  *  This class is based on growingTextView by Hans Pickaers 
  *  http://www.hanspinckaers.com/multi-line-uitextview-similar-to-sms
  */
-
 #import "UIExpandingTextView.h"
+#import "UIInputToolbar.h"
+#import <objc/runtime.h>
 
 #define kTextInsetX 4
 #define kTextInsetBottom 0
@@ -109,12 +110,13 @@
         [self addSubview:internalTextView];
 
         /* Calculate the text view height */
-		UIView *internal = (UIView*)[[internalTextView subviews] objectAtIndex:0];
-		minimumHeight = internal.frame.size.height;
-		[self setMinimumNumberOfLines:1];
-		animateHeightChange = YES;
-		internalTextView.text = @"";
-		[self setMaximumNumberOfLines:13];
+        UIView *internal = (UIView*)[[internalTextView subviews] objectAtIndex:0];
+        maximumHeight = SHRT_MAX;
+        minimumHeight = internal.frame.size.height;
+        [self setMinimumNumberOfLines:1];
+        animateHeightChange = YES;
+        internalTextView.text = @"";
+        [self setMaximumNumberOfLines:13];
         
         [self sizeToFit];
     }
@@ -165,7 +167,7 @@
     }
     internalTextView.text     = newText;
     didChange = (maximumHeight != internalTextView.contentSize.height);
-    maximumHeight             = internalTextView.contentSize.height;
+    maximumHeight             = [UIInputToolbar isIOS7AndUp] ? maximumHeight : internalTextView.contentSize.height; // internalTextView is not an expected view for iOS7. Don't use contentSize.
     maximumNumberOfLines      = n;
     internalTextView.text     = saveText;
     internalTextView.hidden   = NO;
@@ -187,7 +189,7 @@
         newText = [newText stringByAppendingString:@"\n|W|"];
     }
     internalTextView.text     = newText;
-    minimumHeight             = internalTextView.contentSize.height;
+    minimumHeight             = [UIInputToolbar isIOS7AndUp] ? minimumHeight : internalTextView.contentSize.height; // internalTextView is not an expected view for iOS7. Don't use contentSize.
     internalTextView.text     = saveText;
     internalTextView.hidden   = NO;
     internalTextView.delegate = self;
@@ -196,6 +198,22 @@
 }
 
 
+- (CGFloat)heightFromInternalTextView:(UIExpandingTextViewInternal *)textView {
+    if([UIInputToolbar isIOS7AndUp]) {
+        CGSize size = [textView.text sizeWithFont:internalTextView.font constrainedToSize:CGSizeMake(textView.contentSize.width - 16, SHRT_MAX)];
+
+        CGFloat height = size.height - textView.contentInset.top - textView.contentInset.bottom + 8;
+        unichar lastChar = [textView.text characterAtIndex:textView.text.length - 1];
+        if(lastChar == '\n') {
+            height += [internalTextView.font pointSize];
+        }
+
+        return height;
+    } else {
+        return textView.contentSize.height;
+    }
+}
+
 - (void)textViewDidChange:(UITextView *)textView
 {
     if(textView.text.length == 0)
@@ -203,7 +221,7 @@
     else
         placeholderLabel.alpha = 0;
     
-	NSInteger newHeight = internalTextView.contentSize.height;
+	NSInteger newHeight = [self heightFromInternalTextView:internalTextView];
     
 	if(newHeight < minimumHeight || !internalTextView.hasText)
     {
