@@ -35,7 +35,9 @@
     }
 
     /* Remove the keyboard and clear the text */
-    [self.textView resignFirstResponder];
+    if(self.hideKeyboardOnSubmit){
+        [self.textView resignFirstResponder];
+    }
     [self.textView clearText];
 }
 
@@ -64,6 +66,7 @@
     self.inputButton.customView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     /* Disable button initially */
     self.inputButton.enabled = NO;
+    self.hideKeyboardOnSubmit = YES;
 
     /* Create UIExpandingTextView input */
     self.textView = [[UIExpandingTextView alloc] initWithFrame:CGRectMake(7, 7, self.bounds.size.width - 84, 26)];
@@ -93,6 +96,10 @@
         [self setupToolbar:@"Send"];
     }
     return self;
+}
+
+- (void)setLabel:(NSString*)text{
+    [self setupToolbar:text];
 }
 
 - (void)drawRect:(CGRect)rect
