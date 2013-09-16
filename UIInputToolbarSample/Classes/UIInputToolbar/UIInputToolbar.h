@@ -34,9 +34,11 @@
 @interface UIInputToolbar : UIToolbar <UIExpandingTextViewDelegate>
 
 - (void)drawRect:(CGRect)rect;
+- (void)setLabel:(NSString*)text;
 
 @property (nonatomic, strong) UIExpandingTextView *textView;
 @property (nonatomic, strong) UIBarButtonItem *inputButton;
 @property (nonatomic, weak) id<UIInputToolbarDelegate> inputDelegate;
+@property (nonatomic, assign) BOOL hideKeyboardOnSubmit;
 
 @end
