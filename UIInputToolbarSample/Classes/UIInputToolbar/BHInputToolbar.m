@@ -23,9 +23,9 @@
  *  THE SOFTWARE.
  */
 
-#import "UIInputToolbar.h"
+#import "BHInputToolbar.h"
 
-@implementation UIInputToolbar
+@implementation BHInputToolbar
 
 -(void)inputButtonPressed
 {
@@ -66,7 +66,7 @@
     self.inputButton.enabled = NO;
 
     /* Create UIExpandingTextView input */
-    self.textView = [[UIExpandingTextView alloc] initWithFrame:CGRectMake(7, 7, self.bounds.size.width - 84, 26)];
+    self.textView = [[BHExpandingTextView alloc] initWithFrame:CGRectMake(7, 7, self.bounds.size.width - 84, 26)];
     self.textView.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(4.0f, 0.0f, 10.0f, 0.0f);
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     self.textView.delegate = self;
@@ -112,7 +112,7 @@
 #pragma mark -
 #pragma mark UIExpandingTextView delegate
 
--(void)expandingTextView:(UIExpandingTextView *)expandingTextView willChangeHeight:(float)height
+-(void)expandingTextView:(BHExpandingTextView *)expandingTextView willChangeHeight:(float)height
 {
     /* Adjust the height of the toolbar when the input component expands */
     float diff = (self.textView.frame.size.height - height);
@@ -125,7 +125,7 @@
     }
 }
 
--(void)expandingTextViewDidChange:(UIExpandingTextView *)expandingTextView
+-(void)expandingTextViewDidChange:(BHExpandingTextView *)expandingTextView
 {
     /* Enable/Disable the button */
     if ([expandingTextView.text length] > 0)
@@ -136,7 +136,7 @@
         [self.inputDelegate expandingTextViewDidChange:expandingTextView];
 }
 
-- (BOOL)expandingTextViewShouldReturn:(UIExpandingTextView *)expandingTextView
+- (BOOL)expandingTextViewShouldReturn:(BHExpandingTextView *)expandingTextView
 {
     if ([self.inputDelegate respondsToSelector:_cmd]) {
         return [self.inputDelegate expandingTextViewShouldReturn:expandingTextView];
@@ -145,7 +145,7 @@
     return YES;
 }
 
-- (BOOL)expandingTextViewShouldBeginEditing:(UIExpandingTextView *)expandingTextView
+- (BOOL)expandingTextViewShouldBeginEditing:(BHExpandingTextView *)expandingTextView
 {
     if ([self.inputDelegate respondsToSelector:_cmd]) {
         return [self.inputDelegate expandingTextViewShouldBeginEditing:expandingTextView];
@@ -153,7 +153,7 @@
     return YES;
 }
 
-- (BOOL)expandingTextViewShouldEndEditing:(UIExpandingTextView *)expandingTextView
+- (BOOL)expandingTextViewShouldEndEditing:(BHExpandingTextView *)expandingTextView
 {
     if ([self.inputDelegate respondsToSelector:_cmd]) {
         return [self.inputDelegate expandingTextViewShouldEndEditing:expandingTextView];
@@ -161,21 +161,21 @@
     return YES;
 }
 
-- (void)expandingTextViewDidBeginEditing:(UIExpandingTextView *)expandingTextView
+- (void)expandingTextViewDidBeginEditing:(BHExpandingTextView *)expandingTextView
 {
     if ([self.inputDelegate respondsToSelector:_cmd]) {
         [self.inputDelegate expandingTextViewDidBeginEditing:expandingTextView];
     }
 }
 
-- (void)expandingTextViewDidEndEditing:(UIExpandingTextView *)expandingTextView
+- (void)expandingTextViewDidEndEditing:(BHExpandingTextView *)expandingTextView
 {
     if ([self.inputDelegate respondsToSelector:_cmd]) {
         [self.inputDelegate expandingTextViewDidEndEditing:expandingTextView];
     }
 }
 
-- (BOOL)expandingTextView:(UIExpandingTextView *)expandingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+- (BOOL)expandingTextView:(BHExpandingTextView *)expandingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if ([self.inputDelegate respondsToSelector:_cmd]) {
         return [self.inputDelegate expandingTextView:expandingTextView shouldChangeTextInRange:range replacementText:text];
@@ -183,14 +183,14 @@
     return YES;
 }
 
-- (void)expandingTextView:(UIExpandingTextView *)expandingTextView didChangeHeight:(float)height
+- (void)expandingTextView:(BHExpandingTextView *)expandingTextView didChangeHeight:(float)height
 {
     if ([self.inputDelegate respondsToSelector:_cmd]) {
         [self.inputDelegate expandingTextView:expandingTextView didChangeHeight:height];
     }
 }
 
-- (void)expandingTextViewDidChangeSelection:(UIExpandingTextView *)expandingTextView
+- (void)expandingTextViewDidChangeSelection:(BHExpandingTextView *)expandingTextView
 {
     if ([self.inputDelegate respondsToSelector:_cmd]) {
         [self.inputDelegate expandingTextViewDidChangeSelection:expandingTextView];

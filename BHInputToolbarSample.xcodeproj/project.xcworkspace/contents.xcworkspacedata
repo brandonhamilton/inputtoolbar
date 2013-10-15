@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:UIInputToolbarSample.xcodeproj">
+      location = "self:BHInputToolbarSample.xcodeproj">
    </FileRef>
 </Workspace>

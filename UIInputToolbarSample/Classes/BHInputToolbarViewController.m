@@ -23,14 +23,14 @@
  *  THE SOFTWARE.
  */
 
-#import "UIInputToolbarViewController.h"
+#import "BHInputToolbarViewController.h"
 
 #define kStatusBarHeight 20
 #define kDefaultToolbarHeight 40
 #define kKeyboardHeightPortrait 216
 #define kKeyboardHeightLandscape 140
 
-@implementation UIInputToolbarViewController
+@implementation BHInputToolbarViewController
 
 @synthesize inputToolbar;
 
@@ -47,7 +47,7 @@
     self.view = [[UIView alloc] initWithFrame:screenFrame];
     self.view.backgroundColor = [UIColor whiteColor];
     /* Create toolbar */
-    self.inputToolbar = [[UIInputToolbar alloc] initWithFrame:CGRectMake(0, screenFrame.size.height-kDefaultToolbarHeight, screenFrame.size.width, kDefaultToolbarHeight)];
+    self.inputToolbar = [[BHInputToolbar alloc] initWithFrame:CGRectMake(0, screenFrame.size.height-kDefaultToolbarHeight, screenFrame.size.width, kDefaultToolbarHeight)];
     [self.view addSubview:self.inputToolbar];
     inputToolbar.inputDelegate = self;
     inputToolbar.textView.placeholder = @"Placeholder";
