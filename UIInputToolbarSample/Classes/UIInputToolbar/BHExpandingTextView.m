@@ -138,6 +138,63 @@
     [self textViewDidChange:self.internalTextView];
 }
 
+/*
+ * Code and comments thanks to https://github.com/sanjerali
+ * Based on http://stackoverflow.com/a/19047464/296888 by http://stackoverflow.com/users/1003533/tarmes
+ * Function to measure the textView Height in ios7
+ */
+-(CGFloat)measureHeightOfUITextView:(UITextView *)textView
+{
+    if ([textView respondsToSelector:@selector(snapshotViewAfterScreenUpdates:)])
+    {
+        // This is the code for iOS 7. contentSize no longer returns the correct value, so
+        // we have to calculate it.
+        //
+        // This is partly borrowed from HPGrowingTextView, but I've replaced the
+        // magic fudge factors with the calculated values (having worked out where
+        // they came from)
+        
+        CGRect frame = textView.bounds;
+        
+        // Take account of the padding added around the text.
+        
+        UIEdgeInsets textContainerInsets = textView.textContainerInset;
+        UIEdgeInsets contentInsets = textView.contentInset;
+        
+        CGFloat leftRightPadding = textContainerInsets.left + textContainerInsets.right + textView.textContainer.lineFragmentPadding * 2 + contentInsets.left + contentInsets.right;
+        CGFloat topBottomPadding = textContainerInsets.top + textContainerInsets.bottom + contentInsets.top + contentInsets.bottom;
+        
+        frame.size.width -= leftRightPadding;
+        frame.size.height -= topBottomPadding;
+        
+        NSString *textToMeasure = textView.text;
+        if ([textToMeasure hasSuffix:@"\n"])
+        {
+            textToMeasure = [NSString stringWithFormat:@"%@-", textView.text];
+        }
+        
+        // NSString class method: boundingRectWithSize:options:attributes:context is
+        // available only on ios7.0 sdk.
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
+        
+        NSDictionary *attributes = @{ NSFontAttributeName: textView.font, NSParagraphStyleAttributeName : paragraphStyle };
+        
+        CGRect size = [textToMeasure boundingRectWithSize:CGSizeMake(CGRectGetWidth(frame), MAXFLOAT)
+                                                  options:NSStringDrawingUsesLineFragmentOrigin
+                                               attributes:attributes
+                                                  context:nil];
+        
+        CGFloat measuredHeight = ceilf(CGRectGetHeight(size) + topBottomPadding);
+        return measuredHeight+8.0f;
+    }
+    else
+    {
+        return textView.contentSize.height;
+    }
+}
+
 -(void)setMaximumNumberOfLines:(NSUInteger)n
 {
     BOOL didChange            = NO;
@@ -150,8 +207,19 @@
         newText = [newText stringByAppendingString:@"\n|W|"];
     }
     self.internalTextView.text     = newText;
-    didChange = (self.maximumHeight != self.internalTextView.contentSize.height);
-    self.maximumHeight             = self.internalTextView.contentSize.height;
+
+    if(floor(NSFoundationVersionNumber)>NSFoundationVersionNumber_iOS_6_1) {
+        didChange = (self.maximumHeight != [self measureHeightOfUITextView:self.internalTextView]);
+    }
+    else {
+        didChange = (self.maximumHeight != self.internalTextView.contentSize.height);
+    }
+    if(floor(NSFoundationVersionNumber)>NSFoundationVersionNumber_iOS_6_1) {
+        self.maximumHeight             = [self measureHeightOfUITextView:self.internalTextView];
+    } else {
+        self.maximumHeight             = self.internalTextView.contentSize.height;
+    }
+    
     _maximumNumberOfLines      = n;
     self.internalTextView.text     = saveText;
     self.internalTextView.hidden   = NO;
@@ -173,7 +241,12 @@
         newText = [newText stringByAppendingString:@"\n|W|"];
     }
     self.internalTextView.text     = newText;
-    self.minimumHeight             = self.internalTextView.contentSize.height;
+    if(floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+        self.minimumHeight = [self measureHeightOfUITextView:self.internalTextView];
+    }
+    else {
+        self.minimumHeight = self.internalTextView.contentSize.height;
+    }
     self.internalTextView.text     = saveText;
     self.internalTextView.hidden   = NO;
     self.internalTextView.delegate = self;
@@ -189,7 +262,12 @@
     else
         self.placeholderLabel.alpha = 0;
 
-	NSInteger newHeight = self.internalTextView.contentSize.height;
+	NSInteger newHeight;
+    if(floor(NSFoundationVersionNumber)>NSFoundationVersionNumber_iOS_6_1) {
+        newHeight = [self measureHeightOfUITextView:self.internalTextView];
+    }else {
+        newHeight = self.internalTextView.contentSize.height;
+    }
 
 	if(newHeight < self.minimumHeight || !self.internalTextView.hasText)
     {
