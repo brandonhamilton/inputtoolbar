@@ -26,11 +26,9 @@
 #import <UIKit/UIKit.h>
 #import "BHInputToolbar.h"
 
-@interface BHInputToolbarViewController : UIViewController <BHInputToolbarDelegate> {
-    BHInputToolbar *inputToolbar;
+@interface BHInputToolbarViewController : UIViewController <BHInputToolbarDelegate>
+{
     
-    @private
-    BOOL keyboardIsVisible;
 }
 
 @property (nonatomic, strong) BHInputToolbar *inputToolbar;
